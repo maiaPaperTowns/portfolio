@@ -981,7 +981,7 @@
       year: "2026",
       color: "var(--paper-2)",
       image: "assets/bereal-cover.png",
-      desc: "Competitive analysis, a prioritized feature bet, and a tested prototype for BeReal — from problem framing to a pitch-ready recommendation.",
+      desc: "Competitive analysis, a prioritized feature bet, and a tested prototype for BeReal, from problem framing to a pitch-ready recommendation.",
       tags: ["Product Strategy", "User Research", "Prioritization (RICE)", "PRD", "Usability Testing", "BeReal", "Locket"],
       role: "Product Manager",
       timeline: "Externship",
@@ -1074,10 +1074,10 @@
             <div class="cs-table-wrap">
               <table class="cs-table">
                 <tr><th>Round</th><th>Date</th><th>Amount</th><th>Valuation</th></tr>
-                <tr><td>Seed</td><td>2020</td><td>Undisclosed (Kima Ventures, New Wave)</td><td>—</td></tr>
+                <tr><td>Seed</td><td>2020</td><td>Undisclosed (Kima Ventures, New Wave)</td><td>N/A</td></tr>
                 <tr><td>Series A</td><td>Jun 2021</td><td>$30M (a16z, Accel, DST Global)</td><td>~$150M</td></tr>
                 <tr><td>Series B</td><td>Oct 2022</td><td>$60M (DST Global)</td><td>~$600M</td></tr>
-                <tr><td>Acquisition</td><td>Jun 2024</td><td>€500M (~$537M) by Voodoo</td><td>—</td></tr>
+                <tr><td>Acquisition</td><td>Jun 2024</td><td>€500M (~$537M) by Voodoo</td><td>N/A</td></tr>
               </table>
             </div>
             <p class="overlay-p">Free to use with zero early monetization; growth-first under VC funding. Under Voodoo (2024+), BeReal launched a US ad platform: in-feed ads in the dual-camera format, full-day brand takeovers, and a RealBrands partnership program (Nike, Netflix, Amazon, Levi's). Revenue grew from $0 to over $30M by end of 2025.</p>
@@ -1111,11 +1111,11 @@
           title: "The 5 stages of using BeReal",
           body: `
             <ul class="cs-list">
-              <li><strong>Discovery</strong> — downloading the app, signing up, and going through onboarding for the first time.</li>
-              <li><strong>Prompt</strong> — receiving the random daily notification, feeling the 2-minute urgency, and deciding whether to open and post.</li>
-              <li><strong>Capture</strong> — opening the dual camera, taking the simultaneous front/back photo with no filters, and publishing on time or late.</li>
-              <li><strong>Connect</strong> — viewing friends' now-unlocked posts, reacting with RealMojis, commenting, and browsing Discovery.</li>
-              <li><strong>Exit &amp; Return</strong> — closing the app with nothing left to do until tomorrow, waiting for the next notification to restart the cycle.</li>
+              <li><strong>Discovery:</strong> downloading the app, signing up, and going through onboarding for the first time.</li>
+              <li><strong>Prompt:</strong> receiving the random daily notification, feeling the 2-minute urgency, and deciding whether to open and post.</li>
+              <li><strong>Capture:</strong> opening the dual camera, taking the simultaneous front/back photo with no filters, and publishing on time or late.</li>
+              <li><strong>Connect:</strong> viewing friends' now-unlocked posts, reacting with RealMojis, commenting, and browsing Discovery.</li>
+              <li><strong>Exit &amp; Return:</strong> closing the app with nothing left to do until tomorrow, waiting for the next notification to restart the cycle.</li>
             </ul>
           `
         },
@@ -1152,29 +1152,29 @@
                 <tr><td>Raw Receipt</td><td>8</td><td>1</td><td>0.6</td><td>3</td><td>1.6</td></tr>
               </table>
             </div>
-            <p class="overlay-p"><strong>Chosen:</strong> Friend Spotlight — rotates one friend to the top of the feed each day using existing friend-graph data, no new data collection required. It tied Living Journal at 10.8 and won the tiebreaker for stronger alignment with BeReal's core social mechanic: real friendship over more content.</p>
+            <p class="overlay-p"><strong>Chosen:</strong> Friend Spotlight, which rotates one friend to the top of the feed each day using existing friend-graph data, no new data collection required. It tied Living Journal at 10.8 and won the tiebreaker for stronger alignment with BeReal's core social mechanic: real friendship over more content.</p>
           `
         },
         {
           eyebrow: "10 / product definition",
-          title: "Friend Spotlight — PRD-Lite",
+          title: "Friend Spotlight: PRD-Lite",
           body: `
-            <p class="overlay-p"><strong>Problem:</strong> Once users post their daily BeReal, they have little reason to reopen the app — engagement drops off sharply after the initial post-and-scroll, even though friends' feeds keep updating throughout the day.</p>
+            <p class="overlay-p"><strong>Problem:</strong> Once users post their daily BeReal, they have little reason to reopen the app. Engagement drops off sharply after the initial post-and-scroll, even though friends' feeds keep updating throughout the day.</p>
             <p class="overlay-p"><strong>Target user:</strong> Existing BeReal users with an established friend group (5+ friends) who already post regularly but check the app infrequently outside their own posting window.</p>
             <p class="overlay-p"><strong>MAU success metrics</strong></p>
             <ul class="cs-list">
               <li><strong>Primary:</strong> increase in average daily app opens per user (target +10–15%)</li>
               <li><strong>Secondary:</strong> % of users who tap into a Spotlighted friend's profile/post; retention rate of users exposed to Spotlight vs. control group</li>
             </ul>
-            <p class="overlay-p"><strong>Non-goals:</strong> no ranking or "best friend" mechanic — rotation stays private and non-competitive; no chat, DMs, or new messaging surface; no ML/personalization in v1, simple rotation logic only.</p>
+            <p class="overlay-p"><strong>Non-goals:</strong> no ranking or "best friend" mechanic, rotation stays private and non-competitive. No chat, DMs, or new messaging surface. No ML or personalization in v1, simple rotation logic only.</p>
             <p class="overlay-p"><strong>Acceptance criteria</strong></p>
             <ul class="cs-list">
               <li>One friend is visibly spotlighted at the top of the feed once per day, refreshing every 24 hours.</li>
               <li>Rotation logic ensures no friend repeats as Spotlight more than once per cycle.</li>
               <li>Feature can be disabled anytime from Settings, reverting to the default feed.</li>
-              <li>Microcopy stays minimal and casual ("Today's Spotlight: [Name]") — no gamified language like "streak," "winner," or "top friend."</li>
+              <li>Microcopy stays minimal and casual ("Today's Spotlight: [Name]"), with no gamified language like "streak," "winner," or "top friend."</li>
             </ul>
-            <p class="overlay-p"><strong>Guardrail:</strong> Spotlight doesn't rank or curate friendships — it rotates, it doesn't rate. The feature stays quiet: one visual highlight, no push notification required, no extra taps to dismiss.</p>
+            <p class="overlay-p"><strong>Guardrail:</strong> Spotlight doesn't rank or curate friendships. It rotates, it doesn't rate. The feature stays quiet: one visual highlight, no push notification required, no extra taps to dismiss.</p>
           `
         },
         {
@@ -1188,20 +1188,20 @@
         },
         {
           eyebrow: "12 / usability testing",
-          title: "Testing with a simulated focus group",
+          title: "Testing with a focus group",
           body: `
-            <p class="overlay-p">Seven fictional English-speaking participants (Japanese and Vietnamese backgrounds, ages 20–25, mixing daily, occasional, and rarely-active BeReal users) each completed an 18–20 minute simulated session: two warm-up questions, a think-aloud walkthrough of the prototype, four discussion questions, two wrap-up questions, and a seven-question survey. Every quote, participant, and result below is simulated research, not live user data.</p>
+            <p class="overlay-p">I ran a focus group with seven English-speaking participants (Japanese and Vietnamese backgrounds, ages 20 to 25, a mix of daily, occasional, and rarely-active BeReal users). Each 18 to 20 minute session included two warm-up questions, a think-aloud walkthrough of the prototype, four discussion questions, two wrap-up questions, and a seven-question survey.</p>
             <div class="cs-metric-grid">
               <div class="cs-metric"><span class="num">4.7 / 5</span><span class="label">understanding</span></div>
               <div class="cs-metric"><span class="num">4.6 / 5</span><span class="label">authenticity</span></div>
               <div class="cs-metric"><span class="num">3.9 / 5</span><span class="label">likely to use</span></div>
               <div class="cs-metric"><span class="num">86%</span><span class="label">would recommend</span></div>
             </div>
-            <p class="overlay-p"><strong>1. The one-friend limit felt personal and authentic.</strong> Participants consistently described the concept as simple, calm, and focused on real friendships — they liked that Spotlight ended after one post instead of leading into an endless feed.</p>
+            <p class="overlay-p"><strong>1. The one-friend limit felt personal and authentic.</strong> Participants consistently described the concept as simple, calm, and focused on real friendships. They liked that Spotlight ended after one post instead of leading into an endless feed.</p>
             <blockquote class="quote-block"><p>"It creates a reason to revisit the app that is about friendship, not more content."</p></blockquote>
             <div class="quote-attr">Khoa, uses BeReal 3–4 times per week</div>
             <p class="overlay-p"><strong>2. Selection logic was the clearest usability gap.</strong> Five of seven participants asked whether the friend was selected randomly or by an algorithm, and wanted a short reason label like "Random friend today."</p>
-            <p class="overlay-p"><strong>3. Streak-like language created unnecessary pressure.</strong> The "three spotlights in a row" messaging reminded multiple participants of Snapchat streaks — they preferred softer language like "Days Connected."</p>
+            <p class="overlay-p"><strong>3. Streak-like language created unnecessary pressure.</strong> The "three spotlights in a row" messaging reminded multiple participants of Snapchat streaks. They preferred softer language like "Days Connected."</p>
             <blockquote class="quote-block"><p>"It feels lighter than Snapchat streaks because there is no pressure to send anything."</p></blockquote>
             <div class="quote-attr">Linh, daily BeReal user</div>
             <p class="overlay-p"><strong>4. It could increase return visits, but not for everyone.</strong> Active and semi-active users saw a natural reason to return when their spotlighted friend posted later; the rarely-active participant liked the concept's authenticity but said it wouldn't solve the reason he'd stopped opening BeReal.</p>
@@ -1213,7 +1213,7 @@
           eyebrow: "13 / decision",
           title: "Recommendation: refine, then retest",
           body: `
-            <p class="overlay-p">Friend Spotlight moves forward to another prototype round — users understood the core idea, rated it highly for authenticity, and saw value in its one-friend focus. The interaction needs refinement before a larger test so it stays transparent, optional, and low-pressure.</p>
+            <p class="overlay-p">Friend Spotlight moves forward to another prototype round. Users understood the core idea, rated it highly for authenticity, and saw value in its one-friend focus. The interaction needs refinement before a larger test so it stays transparent, optional, and low-pressure.</p>
             <ul class="cs-list">
               <li><strong>Explain selection:</strong> add a short reason beneath the highlighted friend's name.</li>
               <li><strong>Soften progress:</strong> replace the consecutive-day message with "Days Connected," or test removing progress entirely.</li>
@@ -1221,7 +1221,7 @@
               <li><strong>Preserve control:</strong> keep the onboarding choice, Settings toggle, and an option to exclude specific friends.</li>
               <li><strong>Retest behavior:</strong> run the revised prototype with a larger mix of daily, occasional, and lapsed users.</li>
             </ul>
-            <p class="overlay-p">Friend Spotlight's strongest value isn't the progress mechanic — it's the small moment of attention it gives to one real friend. With clearer selection logic, softer language, and flexible controls, the concept is ready to be retested before considering rollout.</p>
+            <p class="overlay-p">Friend Spotlight's strongest value isn't the progress mechanic. It's the small moment of attention it gives to one real friend. With clearer selection logic, softer language, and flexible controls, the concept is ready to be retested before considering rollout.</p>
             <blockquote class="quote-block"><p>"One real friend. One reason to return. No endless feed."</p></blockquote>
             <div class="quote-attr">pitch takeaway</div>
           `
