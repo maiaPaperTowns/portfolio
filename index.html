@@ -82,8 +82,14 @@
     border-bottom:1px solid var(--line);
   }
   nav .wrap{
-    display:flex; align-items:center; justify-content:space-between;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
     height:64px;
+  }
+  .nav-right{
+    display:flex; align-items:center; gap:14px;
+  }
+  @media(max-width:820px){
+    .nav-right .nav-cta{ display:none; }
   }
   .logo{
     font-family:'Libre Baskerville', serif; font-style:italic; font-weight:400; font-size:1.2rem;
@@ -102,6 +108,16 @@
   }
   .navlinks a:active{ opacity:0.5; }
 
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:10px 20px; border-radius:999px;
+    font-size:0.95rem; font-weight:600; color:#fff;
+    background:var(--accent);
+    transition:opacity .15s ease, transform .15s ease;
+  }
+  .nav-cta:hover{ opacity:0.9; }
+  .nav-cta:active{ transform:scale(0.96); }
+
   /* ---------- MOBILE BOTTOM TAB BAR ---------- */
   .mobile-tabbar{
     display:none;
@@ -109,7 +125,7 @@
   @media(max-width:820px){
     .mobile-tabbar{
       display:flex; justify-content:space-around; align-items:center;
-      position:fixed; left:16px; right:16px; bottom:16px; z-index:60;
+      position:fixed; top:auto; left:16px; right:16px; bottom:16px; z-index:60;
       height:56px; border-radius:999px;
       background:rgba(255,255,255,0.9); backdrop-filter:blur(14px);
       border:1px solid var(--line);
@@ -555,6 +571,15 @@
   .cs-metric .num{ font-family:'Libre Baskerville', serif; font-style:italic; font-size:1.6rem; display:block; }
   .cs-metric .label{ font-family:'JetBrains Mono', monospace; font-size:0.7rem; color:var(--ink-soft); }
 
+  .cs-link-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 20px; border-radius:999px; margin-bottom:20px;
+    border:1.5px solid var(--accent); color:var(--ink);
+    font-family:'JetBrains Mono', monospace; font-size:0.85rem;
+    transition:background .15s ease, color .15s ease;
+  }
+  .cs-link-btn:hover{ background:var(--accent); color:#fff; }
+
   /* left-side scroll progress bar, one tick per case-study section (desktop only) */
   .cs-progress{
     position:fixed; left:28px; top:50%; transform:translateY(-50%);
@@ -700,11 +725,14 @@
 <nav>
   <div class="wrap">
     <div class="logo">maia le 𓆝</div>
-    <div class="navlinks" id="navLinks">
-      <div class="nav-bubble" id="navBubble"></div>
-      <a href="#work">work</a>
-      <a href="#" id="navAboutLink">about</a>
-      <a href="#contact">contact</a>
+    <div class="nav-right">
+      <div class="navlinks" id="navLinks">
+        <div class="nav-bubble" id="navBubble"></div>
+        <a href="#work">work</a>
+        <a href="#" id="navAboutLink">about</a>
+        <a href="#contact">contact</a>
+      </div>
+      <a class="nav-cta" href="https://drive.google.com/file/d/1qIQvSPjwKrsJSxKgMnyaauqbJeww2t6K/view?usp=sharing" target="_blank" rel="noopener"><span>resume</span></a>
     </div>
   </div>
 </nav>
@@ -714,6 +742,7 @@
   <a href="#work">work</a>
   <a href="#" id="mobileAboutLink">about</a>
   <a href="#contact">contact</a>
+  <a href="https://drive.google.com/file/d/1qIQvSPjwKrsJSxKgMnyaauqbJeww2t6K/view?usp=sharing" target="_blank" rel="noopener">resume</a>
 </nav>
 
 <header class="hero">
@@ -951,9 +980,9 @@
       title: "BeReal Product Manager Externship",
       year: "2026",
       color: "var(--paper-2)",
-      image: "assets/bereal-banner.jpg",
-      desc: "Competitive product analysis of BeReal and Locket, from problem framing to a journey map.",
-      tags: ["Product Strategy", "User Research", "Competitive Analysis", "BeReal", "Locket"],
+      image: "assets/bereal-cover.png",
+      desc: "Competitive analysis, a prioritized feature bet, and a tested prototype for BeReal — from problem framing to a pitch-ready recommendation.",
+      tags: ["Product Strategy", "User Research", "Prioritization (RICE)", "PRD", "Usability Testing", "BeReal", "Locket"],
       role: "Product Manager",
       timeline: "Externship",
       type: "Product Externship",
@@ -1104,6 +1133,97 @@
                 <tr><td>Exit &amp; Return</td><td>Closes the app, checks back out of habit, sometimes misses the notification and posts late or skips.</td><td>Calm about the lack of content until tomorrow; uncertain about long-term commitment based on friend activity.</td></tr>
               </table>
             </div>
+          `
+        },
+        {
+          eyebrow: "09 / prioritization",
+          title: "Scoring feature ideas with RICE",
+          body: `
+            <p class="overlay-p">Seven feature concepts came out of the research above. I scored each on Reach, Impact, Confidence, and Effort to decide what was worth prototyping and pitching.</p>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <tr><th>Idea</th><th>Reach</th><th>Impact</th><th>Confidence</th><th>Effort</th><th>RICE</th></tr>
+                <tr><td><strong>Friend Spotlight</strong></td><td>9</td><td>1.5</td><td>0.8</td><td>1</td><td><strong>10.8</strong></td></tr>
+                <tr><td>Living Journal</td><td>9</td><td>1.5</td><td>0.8</td><td>1</td><td>10.8</td></tr>
+                <tr><td>Prompt Days</td><td>7</td><td>1.5</td><td>0.8</td><td>1</td><td>8.4</td></tr>
+                <tr><td>Time Capsule</td><td>8</td><td>2</td><td>0.7</td><td>2</td><td>5.6</td></tr>
+                <tr><td>Glimpse Widget</td><td>6</td><td>3</td><td>0.7</td><td>3</td><td>4.2</td></tr>
+                <tr><td>Reflection Card</td><td>5</td><td>1</td><td>0.8</td><td>1</td><td>4.0</td></tr>
+                <tr><td>Raw Receipt</td><td>8</td><td>1</td><td>0.6</td><td>3</td><td>1.6</td></tr>
+              </table>
+            </div>
+            <p class="overlay-p"><strong>Chosen:</strong> Friend Spotlight — rotates one friend to the top of the feed each day using existing friend-graph data, no new data collection required. It tied Living Journal at 10.8 and won the tiebreaker for stronger alignment with BeReal's core social mechanic: real friendship over more content.</p>
+          `
+        },
+        {
+          eyebrow: "10 / product definition",
+          title: "Friend Spotlight — PRD-Lite",
+          body: `
+            <p class="overlay-p"><strong>Problem:</strong> Once users post their daily BeReal, they have little reason to reopen the app — engagement drops off sharply after the initial post-and-scroll, even though friends' feeds keep updating throughout the day.</p>
+            <p class="overlay-p"><strong>Target user:</strong> Existing BeReal users with an established friend group (5+ friends) who already post regularly but check the app infrequently outside their own posting window.</p>
+            <p class="overlay-p"><strong>MAU success metrics</strong></p>
+            <ul class="cs-list">
+              <li><strong>Primary:</strong> increase in average daily app opens per user (target +10–15%)</li>
+              <li><strong>Secondary:</strong> % of users who tap into a Spotlighted friend's profile/post; retention rate of users exposed to Spotlight vs. control group</li>
+            </ul>
+            <p class="overlay-p"><strong>Non-goals:</strong> no ranking or "best friend" mechanic — rotation stays private and non-competitive; no chat, DMs, or new messaging surface; no ML/personalization in v1, simple rotation logic only.</p>
+            <p class="overlay-p"><strong>Acceptance criteria</strong></p>
+            <ul class="cs-list">
+              <li>One friend is visibly spotlighted at the top of the feed once per day, refreshing every 24 hours.</li>
+              <li>Rotation logic ensures no friend repeats as Spotlight more than once per cycle.</li>
+              <li>Feature can be disabled anytime from Settings, reverting to the default feed.</li>
+              <li>Microcopy stays minimal and casual ("Today's Spotlight: [Name]") — no gamified language like "streak," "winner," or "top friend."</li>
+            </ul>
+            <p class="overlay-p"><strong>Guardrail:</strong> Spotlight doesn't rank or curate friendships — it rotates, it doesn't rate. The feature stays quiet: one visual highlight, no push notification required, no extra taps to dismiss.</p>
+          `
+        },
+        {
+          eyebrow: "11 / prototype",
+          title: "Prototyping the flow",
+          body: `
+            <p class="overlay-p">A six-screen prototype covered the full loop: opt in and receive today's selected friend, see when that friend posts and open their BeReal, then finish for the day, return tomorrow, or disable the feature in Settings.</p>
+            <a class="cs-link-btn" href="https://www.figma.com/make/Z6HAXRvkpYBhxQAkk5ywVg/Friend-Spotlight-App-Flow?t=6U2N6IoADtExAWU3-1" target="_blank" rel="noopener">view interactive prototype ↗</a>
+            <p class="overlay-p">Guided throughout the externship by <strong>Ben Moore</strong>, US Managing Director at BeReal.</p>
+          `
+        },
+        {
+          eyebrow: "12 / usability testing",
+          title: "Testing with a simulated focus group",
+          body: `
+            <p class="overlay-p">Seven fictional English-speaking participants (Japanese and Vietnamese backgrounds, ages 20–25, mixing daily, occasional, and rarely-active BeReal users) each completed an 18–20 minute simulated session: two warm-up questions, a think-aloud walkthrough of the prototype, four discussion questions, two wrap-up questions, and a seven-question survey. Every quote, participant, and result below is simulated research, not live user data.</p>
+            <div class="cs-metric-grid">
+              <div class="cs-metric"><span class="num">4.7 / 5</span><span class="label">understanding</span></div>
+              <div class="cs-metric"><span class="num">4.6 / 5</span><span class="label">authenticity</span></div>
+              <div class="cs-metric"><span class="num">3.9 / 5</span><span class="label">likely to use</span></div>
+              <div class="cs-metric"><span class="num">86%</span><span class="label">would recommend</span></div>
+            </div>
+            <p class="overlay-p"><strong>1. The one-friend limit felt personal and authentic.</strong> Participants consistently described the concept as simple, calm, and focused on real friendships — they liked that Spotlight ended after one post instead of leading into an endless feed.</p>
+            <blockquote class="quote-block"><p>"It creates a reason to revisit the app that is about friendship, not more content."</p></blockquote>
+            <div class="quote-attr">Khoa, uses BeReal 3–4 times per week</div>
+            <p class="overlay-p"><strong>2. Selection logic was the clearest usability gap.</strong> Five of seven participants asked whether the friend was selected randomly or by an algorithm, and wanted a short reason label like "Random friend today."</p>
+            <p class="overlay-p"><strong>3. Streak-like language created unnecessary pressure.</strong> The "three spotlights in a row" messaging reminded multiple participants of Snapchat streaks — they preferred softer language like "Days Connected."</p>
+            <blockquote class="quote-block"><p>"It feels lighter than Snapchat streaks because there is no pressure to send anything."</p></blockquote>
+            <div class="quote-attr">Linh, daily BeReal user</div>
+            <p class="overlay-p"><strong>4. It could increase return visits, but not for everyone.</strong> Active and semi-active users saw a natural reason to return when their spotlighted friend posted later; the rarely-active participant liked the concept's authenticity but said it wouldn't solve the reason he'd stopped opening BeReal.</p>
+            <blockquote class="quote-block"><p>"It is simple, but I do not think it solves why I stopped opening BeReal."</p></blockquote>
+            <div class="quote-attr">Haruto, rarely-active BeReal user</div>
+          `
+        },
+        {
+          eyebrow: "13 / decision",
+          title: "Recommendation: refine, then retest",
+          body: `
+            <p class="overlay-p">Friend Spotlight moves forward to another prototype round — users understood the core idea, rated it highly for authenticity, and saw value in its one-friend focus. The interaction needs refinement before a larger test so it stays transparent, optional, and low-pressure.</p>
+            <ul class="cs-list">
+              <li><strong>Explain selection:</strong> add a short reason beneath the highlighted friend's name.</li>
+              <li><strong>Soften progress:</strong> replace the consecutive-day message with "Days Connected," or test removing progress entirely.</li>
+              <li><strong>Clarify all states:</strong> design clear experiences for when the friend hasn't posted yet.</li>
+              <li><strong>Preserve control:</strong> keep the onboarding choice, Settings toggle, and an option to exclude specific friends.</li>
+              <li><strong>Retest behavior:</strong> run the revised prototype with a larger mix of daily, occasional, and lapsed users.</li>
+            </ul>
+            <p class="overlay-p">Friend Spotlight's strongest value isn't the progress mechanic — it's the small moment of attention it gives to one real friend. With clearer selection logic, softer language, and flexible controls, the concept is ready to be retested before considering rollout.</p>
+            <blockquote class="quote-block"><p>"One real friend. One reason to return. No endless feed."</p></blockquote>
+            <div class="quote-attr">pitch takeaway</div>
           `
         }
       ]
