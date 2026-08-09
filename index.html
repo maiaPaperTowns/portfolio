@@ -6,26 +6,24 @@
 <title>Your Name, Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#FAF8F4;
-    --paper-2:#EFEFF2;
-    --ink:#16161D;
-    --ink-soft:#6B6B76;
-    --accent:#5E5CE6;
-    --line:rgba(20,20,30,0.12);
+    --paper:#FFFFFF;
+    --paper-2:#F5F5F7;
+    --ink:#1D1D1F;
+    --ink-soft:#6E6E73;
+    --accent:#0071E3;
+    --accent-2:#42A5F5;
+    --line:rgba(0,0,0,0.08);
     --radius:14px;
+    --glass-bg:rgba(255,255,255,0.6);
+    --glass-border:rgba(255,255,255,0.5);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
     background-color:var(--paper);
-    background-image:
-      radial-gradient(ellipse 700px 500px at 8% 0%, rgba(94,92,230,0.07), transparent 60%),
-      radial-gradient(ellipse 600px 500px at 100% 20%, rgba(155,107,255,0.08), transparent 60%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-    background-attachment:fixed;
     color:var(--ink);
     font-family:'Afacad Flux', sans-serif;
     line-height:1.5;
@@ -61,7 +59,7 @@
     }
     .custom-cursor.hovering{
       width:46px; height:46px;
-      background:rgba(94,92,230,0.08);
+      background:rgba(0,113,227,0.08);
       border-color:var(--accent);
     }
     .custom-cursor.hovering::after{ opacity:0; }
@@ -77,8 +75,9 @@
   /* ---------- NAV ---------- */
   nav{
     position:sticky; top:0; z-index:250;
-    background:rgba(255,255,255,0.85);
-    backdrop-filter:blur(14px);
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(20px) saturate(180%);
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
     border-bottom:1px solid var(--line);
   }
   nav .wrap{
@@ -89,7 +88,10 @@
     display:flex; align-items:center; gap:14px;
   }
   @media(max-width:820px){
-    .nav-right .nav-cta{ display:none; }
+    .nav-right .nav-cta, .nav-right .nav-lens-cta{ display:none; }
+  }
+  .nav-right .nav-lens-cta{
+    margin-bottom:0; padding:10px 18px; font-size:0.85rem; white-space:nowrap;
   }
   .logo{
     font-family:'Libre Baskerville', serif; font-style:italic; font-weight:400; font-size:1.2rem;
@@ -98,8 +100,11 @@
     position:relative;
     display:flex; gap:6px; font-size:0.95rem;
     padding:6px; border-radius:999px;
-    background:var(--paper-2);
-    border:1px solid var(--line);
+    background:rgba(255,255,255,0.55);
+    backdrop-filter:blur(20px) saturate(180%);
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.6);
+    box-shadow:0 4px 24px -10px rgba(0,0,0,0.12);
   }
   .navlinks a{
     position:relative; z-index:2;
@@ -112,7 +117,11 @@
     display:inline-flex; align-items:center; gap:6px;
     padding:10px 20px; border-radius:999px;
     font-size:0.95rem; font-weight:600; color:#fff;
-    background:var(--accent);
+    background:rgba(0,113,227,0.9);
+    backdrop-filter:blur(20px) saturate(180%);
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.25);
+    box-shadow:0 4px 18px -6px rgba(0,113,227,0.5);
     transition:opacity .15s ease, transform .15s ease;
   }
   .nav-cta:hover{ opacity:0.9; }
@@ -127,9 +136,9 @@
       display:flex; justify-content:space-around; align-items:center;
       position:fixed; top:auto; left:16px; right:16px; bottom:16px; z-index:60;
       height:56px; border-radius:999px;
-      background:rgba(255,255,255,0.9); backdrop-filter:blur(14px);
-      border:1px solid var(--line);
-      box-shadow:0 10px 30px -10px rgba(20,20,30,0.25);
+      background:rgba(255,255,255,0.6); backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%);
+      border:1px solid rgba(255,255,255,0.6);
+      box-shadow:0 10px 30px -10px rgba(0,0,0,0.18);
       padding:0 8px;
     }
     .mobile-tabbar a{
@@ -148,7 +157,7 @@
     position:absolute; top:6px; left:6px; height:calc(100% - 12px);
     width:0; border-radius:999px;
     background:#FFFFFF;
-    box-shadow:0 4px 14px -6px rgba(20,20,30,0.25), 0 0 0 1px var(--line) inset;
+    box-shadow:0 4px 14px -6px rgba(0,0,0,0.25), 0 0 0 1px var(--line) inset;
     transition:transform .35s cubic-bezier(.34,1.56,.64,1), width .35s cubic-bezier(.34,1.56,.64,1), opacity .2s ease;
     opacity:0; z-index:1; pointer-events:none;
   }
@@ -164,6 +173,7 @@
     position:relative; z-index:1;
     display:grid; grid-template-columns:0.85fr 1.3fr; gap:70px; align-items:center;
   }
+  .hero-grid > *{ min-width:0; }
   @media(max-width:820px){ .hero-grid{ grid-template-columns:1fr; } }
 
   h1.hero-title{
@@ -196,7 +206,11 @@
   .hero-badges::-webkit-scrollbar{ display:none; }
   .hero-badge{
     display:inline-flex; align-items:center; white-space:nowrap; flex-shrink:0;
-    background:var(--paper-2);
+    background:rgba(255,255,255,0.55);
+    backdrop-filter:blur(20px) saturate(180%);
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.6);
+    box-shadow:0 4px 18px -10px rgba(0,0,0,0.1);
     border-radius:999px;
     padding:8px 15px;
     font-size:0.78rem; color:var(--ink-soft);
@@ -207,49 +221,43 @@
     .hero-badge{ font-size:0.7rem; padding:7px 12px; }
   }
 
-  /* footnote words: plain text + small superscript number, no visible marker until hovered/tapped */
+  .unique-point{
+    margin-top:26px; padding:18px 20px;
+    border-left:3px solid var(--accent);
+    background:var(--paper-2);
+    border-radius:0 14px 14px 0;
+    max-width:46ch;
+  }
+  .unique-point p{
+    font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:1.02rem;
+    line-height:1.5; color:var(--ink);
+  }
+
+  /* footnote words: subtle dotted-underline emphasis, no hover box (see .photo-puller for the hero visual) */
   .fn{
     color:var(--ink);
     border-bottom:1.5px dotted var(--accent);
-    cursor:help;
-    touch-action:manipulation;
-    -webkit-tap-highlight-color:transparent;
-    transition:color .15s ease;
   }
-  .fn:active{ color:var(--accent); }
   .fn sup{
     font-size:0.65em; color:var(--accent); margin-left:1px;
   }
 
-  /* the blank space that fills in with an image + caption on hover (desktop) or tap (touch) */
-  .hero-reveal{
-    position:relative;
-    height:260px;
+  /* ---------- PHOTO PULLER — pixel-art avatar visual ---------- */
+  .photo-puller{ width:100%; max-width:280px; min-width:0; margin:0 auto; }
+  .pp-frame{
+    position:relative; width:100%; aspect-ratio:4/5;
     display:flex; align-items:center; justify-content:center;
   }
-  .hero-reveal-item{
-    position:absolute; inset:0;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center;
-    opacity:0; transform:translateY(10px) scale(0.94);
-    transition:opacity .25s ease, transform .25s cubic-bezier(.34,1.56,.64,1);
-    pointer-events:none;
+  .pp-pixel-img{
+    width:100%; height:100%;
+    object-fit:contain;
+    image-rendering:pixelated;
   }
-  .hero-reveal-item.active{
-    opacity:1; transform:translateY(0) scale(1);
+  .pp-caption{
+    margin-top:12px; text-align:center;
+    font-family:'JetBrains Mono', monospace; font-size:0.78rem; color:var(--ink-soft);
   }
-  .hero-reveal-item .fn-icon{ font-size:4rem; display:block; margin-bottom:14px; }
-  .hero-reveal-item .fn-icon img{
-    width:120px; height:auto; display:block; margin:0 auto;
-    border-radius:12px;
-  }
-  .hero-reveal-item .fn-caption{
-    font-family:'JetBrains Mono', monospace; font-size:0.78rem;
-    color:var(--ink-soft); line-height:1.5; max-width:26ch;
-  }
-  .hero-reveal-item .fn-caption sup{ color:var(--accent); margin-right:2px; }
-  /* on touch/narrow screens the reveal area sits inline below the bio instead of floating beside it */
-  @media(max-width:820px){ .hero-reveal{ height:180px; } }
+  @media(max-width:820px){ .pp-frame{ aspect-ratio:1/1; } }
 
   .eyebrow{
     font-family:'JetBrains Mono', monospace;
@@ -275,8 +283,10 @@
     font-family:'JetBrains Mono', monospace; color:var(--accent); font-size:0.9rem;
   }
   .section-title{
-    font-family:'Libre Baskerville', serif; font-style:italic; font-weight:400; font-size:2.1rem;
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:2.1rem; letter-spacing:-0.01em;
+    display:inline-flex; align-items:center; gap:10px;
   }
+  .pixel-flower{ display:inline-block; image-rendering:pixelated; flex-shrink:0; }
 
   .reveal{ opacity:0; transform:translateY(24px); transition:opacity .38s ease, transform .38s cubic-bezier(.2,.8,.2,1); }
   .reveal.in{ opacity:1; transform:none; }
@@ -415,7 +425,7 @@
   }
   .project-card:hover .project-mockup{
     transform:translateY(-6px);
-    box-shadow:0 16px 34px -14px rgba(20,20,30,0.22);
+    box-shadow:0 16px 34px -14px rgba(0,0,0,0.22);
   }
   .project-card:active .project-mockup{
     transform:translateY(-2px) scale(0.98);
@@ -428,6 +438,18 @@
     padding:5px 11px; border-radius:999px;
     z-index:2;
   }
+  .project-badge.badge-right{ left:auto; right:16px; }
+
+  .project-item{ display:flex; flex-direction:column; }
+  .card-links{ display:flex; gap:10px; margin-top:14px; }
+  .card-links a{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'JetBrains Mono', monospace; font-size:0.78rem;
+    padding:8px 14px; border-radius:999px;
+    border:1px solid var(--line); color:var(--ink-soft);
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .card-links a:hover{ border-color:var(--accent); color:var(--accent); }
   .project-photo{
     position:absolute; inset:0;
     width:100%; height:100%; object-fit:cover;
@@ -436,7 +458,7 @@
     width:78%; background:var(--paper);
     border-radius:12px;
     border:1px solid var(--line);
-    box-shadow:0 14px 30px -10px rgba(20,20,30,0.15);
+    box-shadow:0 14px 30px -10px rgba(0,0,0,0.15);
     overflow:hidden;
   }
   .project-window-bar{
@@ -595,6 +617,50 @@
   .cs-table-wrap{ overflow-x:auto; margin-bottom:20px; -webkit-overflow-scrolling:touch; }
   .cs-table-wrap .cs-table{ margin-bottom:0; min-width:480px; }
 
+  .cs-code{
+    background:#1D1D1F; color:#E5E5EA;
+    font-family:'JetBrains Mono', monospace; font-size:0.82rem; line-height:1.6;
+    padding:14px 16px; border-radius:10px; overflow-x:auto;
+    margin:8px 0 16px; white-space:pre;
+  }
+  .cs-bug{
+    border:1px solid var(--line); border-radius:14px;
+    padding:20px 22px; margin-bottom:18px;
+  }
+  .cs-bug-title{ font-weight:600; font-size:1rem; margin-bottom:12px; }
+  .cs-bug-label{
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem; text-transform:uppercase;
+    letter-spacing:0.04em; color:var(--accent); margin:14px 0 4px;
+  }
+  .cs-bug-label:first-of-type{ margin-top:0; }
+
+  .cs-compare-header{ display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+  .cs-compare-icon{
+    width:44px; height:44px; border-radius:12px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--paper-2); font-weight:700; font-size:1.1rem;
+    overflow:hidden;
+  }
+  .cs-compare-icon img{ width:100%; height:100%; object-fit:cover; }
+  .cs-compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:14px; }
+  @media(max-width:600px){ .cs-compare-grid{ grid-template-columns:1fr; } }
+  .cs-compare-col-title{
+    font-weight:600; font-size:0.9rem; margin-bottom:8px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .cs-compare-col-title.pros{ color:#1a9c53; }
+  .cs-compare-col-title.cons{ color:#e0483e; }
+  .cs-gap-box{
+    border:1px solid var(--accent); background:rgba(0,113,227,0.05);
+    border-radius:14px; padding:22px; margin-top:8px;
+  }
+  .cs-gap-title{ font-weight:700; font-size:1.15rem; margin-bottom:8px; }
+  .cs-gap-title span{ color:var(--accent); }
+  .cs-gap-tags{
+    display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:14px;
+    font-family:'JetBrains Mono', monospace; font-size:0.8rem; color:var(--accent); font-weight:600;
+  }
+
   .cs-metric-grid{
     display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; margin:20px 0;
   }
@@ -608,13 +674,31 @@
   .cs-link-btn{
     display:inline-flex; align-items:center; gap:8px;
     padding:12px 20px; border-radius:999px; margin-bottom:20px;
-    border:1.5px solid var(--accent); color:var(--ink);
+    background:rgba(0,113,227,0.08);
+    backdrop-filter:blur(20px) saturate(180%);
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
+    border:1px solid rgba(0,113,227,0.25); color:var(--accent);
     font-family:'JetBrains Mono', monospace; font-size:0.85rem;
     transition:background .15s ease, color .15s ease;
   }
   .cs-link-btn:hover{ background:var(--accent); color:#fff; }
 
   .cs-figure{ margin:8px 0 28px; }
+  .cs-split{ display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center; margin-bottom:8px; }
+  .cs-split .cs-figure{ margin:0; }
+  @media(max-width:700px){ .cs-split{ grid-template-columns:1fr; } }
+  .cs-subhead{
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.3rem;
+    margin:8px 0 12px;
+  }
+  .cs-hmw-box{
+    background:var(--paper-2); border-radius:16px; padding:36px 40px;
+    text-align:center; margin:20px auto 8px; max-width:92%;
+  }
+  .cs-hmw-box p{
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.3rem;
+    line-height:1.4; color:var(--ink);
+  }
   .cs-figure img{
     width:100%; height:auto; display:block;
     border-radius:14px; border:1px solid var(--line);
@@ -675,13 +759,13 @@
   }
 
   .postcard{
-    background:var(--paper);
+    background:var(--paper-2);
     border:1px solid var(--line);
     border-radius:18px;
     padding:36px;
     position:relative;
     overflow:hidden;
-    box-shadow:0 20px 44px -24px rgba(20,20,30,0.18);
+    box-shadow:0 20px 44px -24px rgba(0,0,0,0.14);
   }
   /* easter egg: a koi fish swims across and "catches" the postcard on a successful send */
   .koi-catch{
@@ -784,6 +868,7 @@
         <a href="#" id="navAboutLink">about</a>
         <a href="#contact">contact</a>
       </div>
+      <a class="cs-link-btn nav-lens-cta" href="#" id="navLensLink">life through lens</a>
       <a class="nav-cta" href="https://drive.google.com/file/d/1qIQvSPjwKrsJSxKgMnyaauqbJeww2t6K/view?usp=sharing" target="_blank" rel="noopener"><span>resume</span></a>
     </div>
   </div>
@@ -793,6 +878,7 @@
 <nav class="mobile-tabbar">
   <a href="#work">work</a>
   <a href="#" id="mobileAboutLink">about</a>
+  <a href="#" id="mobileLensLink">lens</a>
   <a href="#contact">contact</a>
   <a href="https://drive.google.com/file/d/1qIQvSPjwKrsJSxKgMnyaauqbJeww2t6K/view?usp=sharing" target="_blank" rel="noopener">resume</a>
 </nav>
@@ -800,8 +886,8 @@
 <header class="hero">
   <div class="wrap hero-grid">
     <div class="hero-text">
-      <div class="cycle-tag" id="cycleTag"><span id="cycleText">currently designing</span><span class="cycle-cursor">|</span></div>
-      <h1 class="hero-title"><span class="name-highlight">maia le</span></h1>
+      <div class="cycle-tag" id="cycleTag"><span id="cycleText">Currently Designing</span><span class="cycle-cursor">|</span></div>
+      <h1 class="hero-title"><span class="name-highlight">Maia Le</span></h1>
       <p class="sub">
         is a product manager,
         <span class="fn" data-fn="1">researcher<sup>1</sup></span>,
@@ -818,25 +904,17 @@
         <span class="hero-badge">cs + comm @ <strong>depauw</strong></span>
         <span class="hero-badge">product manager intern @ <strong>atmus filtration technologies</strong> <span class="badge-note">· DAM (digital asset management)</span></span>
       </div>
+
+      <div class="unique-point">
+        <p>Most product managers can't write the code. Most engineers can't design the interface. I've done product, engineering, and the photography that tells its story, end to end.</p>
+      </div>
     </div>
 
-    <div class="hero-reveal" id="heroReveal">
-      <div class="hero-reveal-item" data-fn="1">
-        <span class="fn-icon">🔍</span>
-        <div class="fn-caption"><sup>1</sup> I love digging into the why behind how people use products.</div>
+    <div class="photo-puller">
+      <div class="pp-frame">
+        <img src="assets/pixel-avatar.png" alt="Pixel-art avatar of Maia" class="pp-pixel-img">
       </div>
-      <div class="hero-reveal-item" data-fn="2">
-        <span class="fn-icon"><img src="assets/camera.jpeg" alt="Fujifilm camera"></span>
-        <div class="fn-caption"><sup>2</sup> I'm rarely without a camera, always chasing good light.</div>
-      </div>
-      <div class="hero-reveal-item" data-fn="3">
-        <span class="fn-icon"><img src="assets/star.jpeg" alt="glass star"></span>
-        <div class="fn-caption"><sup>3</sup> I try to spark a little delight into everything I design.</div>
-      </div>
-      <div class="hero-reveal-item" data-fn="4">
-        <span class="fn-icon"><img src="assets/animals.jpeg" alt="tiny charm animals"></span>
-        <div class="fn-caption"><sup>4</sup> Understanding people is what makes good products possible.</div>
-      </div>
+      <div class="pp-caption">researcher · photographer · builder</div>
     </div>
   </div>
 </header>
@@ -872,9 +950,56 @@
       </div>
     </div>
 
+    <div class="reveal">
+      <h3 class="exp-heading">Snippets of my life</h3>
+      <div class="snippets-grid">
+        <div class="snippet-photo">add photo</div>
+        <div class="snippet-photo">add photo</div>
+        <div class="snippet-photo">add photo</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="overlay" id="lensOverlay">
+  <div class="overlay-nav">
+    <span class="eyebrow" style="margin:0;">life through lens</span>
+    <button class="overlay-close" id="lensClose">close ✕</button>
+  </div>
+  <div class="overlay-body">
+    <div class="reveal">
+      <h2 class="section-title" style="margin-bottom:18px;">Life Through Lens</h2>
+      <p class="about-copy-p" style="color:var(--ink-soft); font-size:1.05rem; max-width:56ch; margin-bottom:18px;">
+        This is where the camera comes out: photography, the creative and communications side of what I do, and the stuff that doesn't fit neatly into a product case study.
+      </p>
+      <p class="about-copy-p" style="color:var(--ink-soft); font-size:1.05rem; max-width:56ch;">
+        Coming soon.
+      </p>
+    </div>
+  </div>
+</div>
+
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title"><svg class="pixel-flower" width="22" height="22" viewBox="0 0 16 16" aria-hidden="true">
+          <rect x="7" y="1" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="7" y="13" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="1" y="7" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="13" y="7" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="4" y="4" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="10" y="4" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="4" y="10" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="10" y="10" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="6" y="6" width="4" height="4" fill="var(--accent)"/>
+          <rect x="7" y="7" width="2" height="2" fill="#fff"/>
+        </svg>Experience</h2>
+    </div>
     <div class="exp-grid reveal">
       <div>
-        <h3 class="exp-heading">Experience</h3>
+        <h3 class="exp-heading">Work</h3>
         <div class="exp-row">
           <div class="exp-role"><span class="exp-company">Atmus Filtration Technologies</span> <span class="exp-title">/ Rotational Product Management Intern</span></div>
           <div class="exp-date">May 2026 – Present</div>
@@ -900,18 +1025,8 @@
         </div>
       </div>
     </div>
-
-    <div class="reveal">
-      <h3 class="exp-heading">Snippets of my life</h3>
-      <div class="snippets-grid">
-        <div class="snippet-photo">add photo</div>
-        <div class="snippet-photo">add photo</div>
-        <div class="snippet-photo">add photo</div>
-      </div>
-    </div>
-
   </div>
-</div>
+</section>
 
 <section class="tech-strip">
   <div class="wrap">
@@ -927,8 +1042,19 @@
 <section class="section" id="work">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="section-num">01</span>
-      <h2 class="section-title">selected work</h2>
+      <span class="section-num">02</span>
+      <h2 class="section-title"><svg class="pixel-flower" width="22" height="22" viewBox="0 0 16 16" aria-hidden="true">
+          <rect x="7" y="1" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="7" y="13" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="1" y="7" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="13" y="7" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="4" y="4" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="10" y="4" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="4" y="10" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="10" y="10" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="6" y="6" width="4" height="4" fill="var(--accent)"/>
+          <rect x="7" y="7" width="2" height="2" fill="#fff"/>
+        </svg>Selected Work</h2>
     </div>
     <div class="projects" id="projectsMount">
       <!-- project cards are generated from the PROJECTS list in the script below -->
@@ -939,8 +1065,19 @@
 <section class="section" id="activity">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="section-num">02</span>
-      <h2 class="section-title">activity log</h2>
+      <span class="section-num">03</span>
+      <h2 class="section-title"><svg class="pixel-flower" width="22" height="22" viewBox="0 0 16 16" aria-hidden="true">
+          <rect x="7" y="1" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="7" y="13" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="1" y="7" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="13" y="7" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="4" y="4" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="10" y="4" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="4" y="10" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="10" y="10" width="2" height="2" fill="#7FB3F5"/>
+          <rect x="6" y="6" width="4" height="4" fill="var(--accent)"/>
+          <rect x="7" y="7" width="2" height="2" fill="#fff"/>
+        </svg>Activity Log</h2>
     </div>
     <div class="activity-feed" id="activityMount">
       <!-- entries are generated from the ACTIVITY list in the script below -->
@@ -1023,7 +1160,17 @@
 
   <div class="footer-meta">
     <span>last updated 07.16.26</span>
-    <span>built with html, css and a little javascript</span>
+    <span>
+      built with html, css and a little javascript
+      <svg class="pixel-heart" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" style="vertical-align:-2px; margin-left:4px; image-rendering:pixelated;">
+        <rect x="2" y="3" width="3" height="3" fill="var(--accent)"/>
+        <rect x="11" y="3" width="3" height="3" fill="var(--accent)"/>
+        <rect x="1" y="6" width="14" height="3" fill="var(--accent)"/>
+        <rect x="3" y="9" width="10" height="2" fill="var(--accent)"/>
+        <rect x="5" y="11" width="6" height="2" fill="var(--accent)"/>
+        <rect x="7" y="13" width="2" height="2" fill="var(--accent)"/>
+      </svg>
+    </span>
   </div>
 </footer>
 
@@ -1341,17 +1488,423 @@
       ]
     },
     {
-      title: "Project Two",
-      year: "2025",
+      title: "Breadcrumb",
+      year: "2026",
       color: "var(--paper-2)",
-      desc: "What it does, who it's for, and the detail you're proudest of.",
-      tags: ["Next.js", "TypeScript", "Tailwind"],
-      role: "Full-stack Developer",
-      timeline: "6 weeks",
-      type: "Team Project",
-      overview: "Same as above, a short and honest summary of the project written for someone skimming your portfolio for the first time.",
-      approachTitle: "The approach",
-      approach: "What was the hardest part? What did you learn? Keep this section concrete and specific rather than generic."
+      image: "assets/breadcrumb-cover.png",
+      badgeAlign: "right",
+      links: [
+        { label: "live app", url: "https://breadcrumps.vercel.app/" },
+        { label: "github", url: "https://github.com/maiaPaperTowns/breadcrumb" }
+      ],
+      desc: "A goal-tracking planner for students juggling internships, research, scholarships, and hackathons, built end to end, from schema to shipped app to a native mobile shell.",
+      tags: ["Next.js", "Supabase", "Gemini API", "Expo"],
+      role: "Solo Developer",
+      timeline: "Solo project",
+      type: "Full-Stack App",
+      sections: [
+        {
+          eyebrow: "01 / overview",
+          title: "One next step, not forty open tabs",
+          body: `
+            <a class="cs-link-btn" href="https://breadcrumps.vercel.app/" target="_blank" rel="noopener" style="margin-right:10px;">live app ↗</a>
+            <a class="cs-link-btn" href="https://github.com/maiaPaperTowns/breadcrumb" target="_blank" rel="noopener">source on github ↗</a>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <tr><th>Stack</th><td>Next.js · Supabase · Gemini · Expo</td></tr>
+                <tr><th>Platforms</th><td>Web, iOS, Android</td></tr>
+                <tr><th>License</th><td>MIT</td></tr>
+              </table>
+            </div>
+            <div class="cs-split">
+              <div>
+                <p class="overlay-p" style="font-family:'JetBrains Mono', monospace; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--accent); margin-bottom:6px;">The Problem</p>
+                <h3 style="font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.5rem; line-height:1.25; margin-bottom:14px;">Students have big goals, but staying on top of everything is overwhelming.</h3>
+                <p class="overlay-p">Internships, research, scholarships, hackathons, each with its own deadlines, documents, and checklists. It's easy to lose track, miss important steps, and feel constant stress.</p>
+                <div class="unique-point" style="margin-top:0;">
+                  <p>How might we help students focus on one next step and make real progress toward their goals?</p>
+                </div>
+              </div>
+              <figure class="cs-figure">
+                <img src="assets/breadcrumb-problem.png" alt="Illustration of a student overwhelmed by internship, research, scholarship, and hackathon deadlines">
+              </figure>
+            </div>
+            <p class="overlay-p">Students applying to internships, research positions, scholarships, and hackathons end up tracking deadlines across a mess of browser tabs, spreadsheets, and sticky notes. Every opportunity has its own checklist, resume, cover letter, recommendation letters, essays, and its own deadline, and it's easy to lose track of what's actually due this week.</p>
+            <p class="overlay-p">Breadcrumb is a single place to log every goal, break it into a task checklist, and see, every time the app opens, exactly one thing to do next. It's opinionated about reducing decision fatigue: the Today screen doesn't show everything, it shows the single highest-priority next step, plus what else is due.</p>
+            <p class="overlay-p"><strong>The loop:</strong> add a goal → get a suggested checklist for that category → chip away at tasks → watch a streak and heatmap build → get reminded before deadlines slip.</p>
+          `
+        },
+        {
+          eyebrow: "02 / research",
+          title: "Understanding how students actually plan",
+          body: `
+            <h4 class="cs-subhead" style="margin-top:0;">Desk Research</h4>
+            <p class="overlay-p">College students increasingly manage academic, career, and extracurricular opportunities across multiple digital platforms. Internship applications may live on Handshake or company career sites, research opportunities in emails and university pages, scholarships in separate portals, while deadlines and application materials are tracked through calendars, spreadsheets, notes, or task-management apps. This fragmented workflow creates additional cognitive load because students must not only complete their work, but also continuously decide what needs their attention next.</p>
+            <div class="unique-point" style="margin-top:0;">
+              <p>How might we reduce the mental overhead of managing multiple goals and help students focus on the most important next action?</p>
+            </div>
+            <div class="cs-split" style="margin-top:28px;">
+              <figure class="cs-figure">
+                <img src="assets/breadcrumb-research.png" alt="Line-art illustration of three college students being interviewed about how they manage internship, research, and scholarship deadlines">
+              </figure>
+              <div>
+                <h4 class="cs-subhead" style="margin-top:0;">User Research</h4>
+                <p class="overlay-p">To better understand how students manage competing opportunities, deadlines, and application tasks, I would conduct interviews with college students actively pursuing internships, research, scholarships, hackathons, or similar opportunities. The interviews would explore their current planning systems, where those systems break down, and what information they need to decide what to work on next.</p>
+                <p class="overlay-p">Key questions could include:</p>
+              </div>
+            </div>
+            <ul class="cs-list">
+              <li>How do you currently keep track of internships, research opportunities, scholarships, or other applications?</li>
+              <li>When you have several deadlines at once, how do you decide what to work on next?</li>
+              <li>Tell me about a time you forgot a deadline or application task. What caused it?</li>
+              <li>What tools do you currently use to organize your goals and deadlines? What works well, and what feels frustrating?</li>
+              <li>Once you find an opportunity, how do you figure out all the steps required to complete it?</li>
+              <li>What would make managing several long-term goals feel less overwhelming?</li>
+            </ul>
+          `
+        },
+        {
+          eyebrow: "03 / competitive analysis",
+          title: "Where existing tools fall short",
+          body: `
+            <p class="overlay-p">After conducting a competitive analysis of other major productivity and career-planning platforms, including Notion, Todoist, and Handshake, common strengths emerged: flexible organization, task and deadline management, and career opportunity discovery. However, these tools often require students to manually turn opportunities into actionable plans.</p>
+
+            <div class="cs-bug">
+              <div class="cs-compare-header">
+                <div class="cs-compare-icon" style="background:#000; color:#fff;">N</div>
+                <div class="cs-bug-title" style="margin-bottom:0;">Notion</div>
+              </div>
+              <p class="overlay-p">Notion is a flexible productivity workspace that students often use to organize applications, projects, deadlines, notes, and personal goals.</p>
+              <div class="cs-compare-grid">
+                <div>
+                  <div class="cs-compare-col-title pros">+ Pros</div>
+                  <ul class="cs-list">
+                    <li><strong>Highly customizable</strong> databases, templates, and dashboards</li>
+                    <li>Can organize internships, research, scholarships, and projects in <strong>one workspace</strong></li>
+                    <li>Strong <strong>collaboration</strong> and documentation features</li>
+                    <li>Large ecosystem of student <strong>productivity templates</strong></li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="cs-compare-col-title cons">− Cons</div>
+                  <ul class="cs-list">
+                    <li>Requires significant <strong>manual setup</strong> and maintenance</li>
+                    <li>Doesn't automatically determine <strong>what a student should work on next</strong></li>
+                    <li>Flexibility can create complex dashboards and <strong>information overload</strong></li>
+                    <li>No student <strong>opportunity-specific checklist</strong> generation by default</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="cs-bug">
+              <div class="cs-compare-header">
+                <div class="cs-compare-icon" style="background:#E44332; color:#fff;">✓</div>
+                <div class="cs-bug-title" style="margin-bottom:0;">Todoist</div>
+              </div>
+              <p class="overlay-p">Todoist is a task and project management app for organizing personal and professional tasks using projects, priorities, labels, and deadlines.</p>
+              <div class="cs-compare-grid">
+                <div>
+                  <div class="cs-compare-col-title pros">+ Pros</div>
+                  <ul class="cs-list">
+                    <li>Fast and <strong>intuitive</strong> task creation</li>
+                    <li>Strong <strong>recurring tasks</strong>, priorities, and reminders</li>
+                    <li><strong>Productivity tracking</strong> and completion history</li>
+                    <li>Works across <strong>web and mobile</strong> platforms</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="cs-compare-col-title cons">− Cons</div>
+                  <ul class="cs-list">
+                    <li>Primarily <strong>task-focused</strong> rather than goal-focused</li>
+                    <li>Users still have to determine and <strong>create most tasks themselves</strong></li>
+                    <li>Doesn't <strong>understand the context</strong> of goals like internships or scholarships</li>
+                    <li><strong>Limited guidance</strong> for multi-step student application processes</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="cs-bug">
+              <div class="cs-compare-header">
+                <div class="cs-compare-icon" style="background:#1F5DF2; color:#fff; font-size:0.85rem;">hi</div>
+                <div class="cs-bug-title" style="margin-bottom:0;">Handshake</div>
+              </div>
+              <p class="overlay-p">Handshake is a career platform designed for college students to discover internships, jobs, employers, and career opportunities.</p>
+              <div class="cs-compare-grid">
+                <div>
+                  <div class="cs-compare-col-title pros">+ Pros</div>
+                  <ul class="cs-list">
+                    <li>Built <strong>specifically for college students</strong></li>
+                    <li><strong>Personalized</strong> internship and job discovery</li>
+                    <li>University and employer <strong>integrations</strong></li>
+                    <li><strong>Centralizes</strong> career opportunities and application information</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="cs-compare-col-title cons">− Cons</div>
+                  <ul class="cs-list">
+                    <li>Focused primarily on <strong>internships and jobs</strong></li>
+                    <li>Doesn't manage research, scholarships, hackathons, or <strong>other student goals</strong></li>
+                    <li>Limited <strong>post-discovery planning</strong> and task management</li>
+                    <li>Students often still need <strong>external calendars</strong>, spreadsheets, or task apps to manage applications</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="cs-gap-box">
+              <div class="cs-gap-title">Market Gap → <span>Breadcrumb</span></div>
+              <p class="overlay-p">Existing products solve individual pieces of the student planning journey, but students still have to manually translate opportunities into deadlines, tasks, and priorities. This revealed an opportunity for Breadcrumb to combine goal-specific checklists, deadline tracking, progress insights, and AI-powered guidance while surfacing one clear next step to reduce decision fatigue.</p>
+              <div class="cs-gap-tags">
+                <span>Goal-specific planning</span><span>Smart checklists</span><span>One prioritized next action</span><span>Progress tracking</span><span>AI guidance</span><span>Calendar export</span><span>Reminders</span>
+              </div>
+            </div>
+          `
+        },
+        {
+          eyebrow: "04 / synthesis",
+          title: "Turning research into direction",
+          body: `
+            <p class="overlay-p">After reviewing the problem space and competitive landscape, I synthesized the research findings to identify several key pain points in how students manage internships, research opportunities, scholarships, hackathons, and other long-term goals:</p>
+            <ul class="cs-list">
+              <li>Students struggle to keep opportunities, deadlines, and application tasks organized across multiple platforms.</li>
+              <li>Students feel overwhelmed when several goals compete for their attention and are unsure what to prioritize next.</li>
+              <li>Students spend significant effort manually breaking large goals into smaller, actionable tasks.</li>
+              <li>Students want to see meaningful progress over time, not just another growing to-do list.</li>
+            </ul>
+            <p class="overlay-p">Other common themes that emerged included decision fatigue, fragmented workflows across browser tabs, spreadsheets, calendars, and notes, and the difficulty of staying consistent when deadlines are weeks or months away. Rather than needing another place to store tasks, students need a system that helps translate larger goals into manageable actions and continuously answers one simple question: what should I do next?</p>
+            <figure class="cs-figure">
+              <img src="assets/breadcrumb-synthesis.png" alt="Affinity map clustering student pain points into Organization & Overwhelm, Prioritization & Focus, Goal Planning & Execution, and Motivation & Progress, with resulting How Might We questions">
+            </figure>
+            <p class="overlay-p">To move from research into ideation, I translated these needs into a series of "How Might We" questions that helped define the direction of Breadcrumb.</p>
+            <h4 class="cs-subhead">How Might We...</h4>
+            <ul class="cs-list">
+              <li>How might we help students manage multiple opportunities without feeling overwhelmed?</li>
+              <li>How might we turn a complex goal into small, actionable steps without requiring students to build every checklist themselves?</li>
+              <li>How might we help students immediately understand the single most important thing they should work on next?</li>
+              <li>How might we make long-term progress visible and motivating through streaks, milestones, and achievements?</li>
+              <li>How might we bring goals, tasks, deadlines, reminders, and guidance into one experience instead of forty open tabs?</li>
+            </ul>
+          `
+        },
+        {
+          eyebrow: "05 / defining the problem",
+          title: "Defining the Problem",
+          body: `
+            <p class="overlay-p">After the research and synthesis stage, I narrowed the key user pain points into one guiding question to drive ideation and shape the next stage of Breadcrumb's design process:</p>
+            <div class="cs-hmw-box">
+              <p>How might we help students juggling multiple goals, tasks, and deadlines know exactly what to work on next without feeling overwhelmed?</p>
+            </div>
+          `
+        },
+        {
+          eyebrow: "06 / ideation",
+          title: "Rapid Brainstorming",
+          body: `
+            <div class="cs-split">
+              <div>
+                <p class="overlay-p">With the identified student needs in mind, I began rapidly exploring potential solutions through Crazy 8s and mind mapping. I focused on ways Breadcrumb could reduce decision fatigue, turn complex goals into manageable steps, centralize scattered deadlines, and make progress feel visible and motivating.</p>
+                <p class="overlay-p">Early concepts included smart goal checklists, a single prioritized next-action card, deadline reminders, progress streaks and heatmaps, calendar integration, and an AI assistant that could provide contextual guidance when students feel stuck. These ideas helped define the core experience: helping students spend less time figuring out what to do and more time actually making progress.</p>
+              </div>
+              <figure class="cs-figure">
+                <img src="assets/breadcrumb-mindmap.png" alt="Mind map exploring Breadcrumb concepts: centralize everything, one clear next step, smart checklists, deadline clarity, stay motivated and celebrate, AI guidance and suggestions, reminders that help, and progress you can see">
+              </figure>
+            </div>
+          `
+        },
+        {
+          eyebrow: "07 / solution",
+          title: "Developing a Solution",
+          body: `
+            <p class="overlay-p">My final solution is Breadcrumb, a goal-tracking planner designed for students juggling internships, research opportunities, scholarships, hackathons, and other long-term goals. Breadcrumb brings scattered goals, tasks, and deadlines into one place, then reduces decision fatigue by surfacing the single most important next step to work on.</p>
+            <p class="overlay-p">Students can create a goal and receive a tailored checklist of actionable tasks, track upcoming deadlines, and build momentum through streaks, progress insights, heatmaps, and achievement badges. A context-aware AI assistant provides personalized guidance based on each student's actual goals and tasks, while reminders and calendar exports help ensure important deadlines don't slip through the cracks.</p>
+          `
+        },
+        {
+          eyebrow: "08 / mood board",
+          title: "Mood Board",
+          body: `
+            <p class="overlay-p">I created a moodboard to refine Breadcrumb's overall visual direction, including typography, colors, iconography, imagery, and general themes before prototyping. The final style guide draws inspiration from growth, small steps, pathways, and personal progress, reflecting Breadcrumb's goal of making career development feel more approachable.</p>
+            <p class="overlay-p">Warm oranges, soft yellows, natural greens, and subtle lavender tones create an encouraging, optimistic, and supportive atmosphere. Rounded shapes, friendly illustrations, and the Breadcrumb character reinforce a sense of guidance and personality, while clean typography and strong contrast keep the experience simple, readable, and accessible.</p>
+            <figure class="cs-figure">
+              <img src="assets/breadcrumb-moodboard.png" alt="Breadcrumb mood board: inspiration imagery, color palette, typography (Poppins and Inter), icon style, UI elements, patterns, textures, and brand values">
+            </figure>
+          `
+        },
+        {
+          eyebrow: "09 / low-fidelity",
+          title: "Low-Fidelity",
+          body: `
+            <p class="overlay-p">Here are a few of the initial screens I sketched to explore Breadcrumb's core user flow, information hierarchy, and interactions. These early wireframes helped visualize how students could move from viewing their next priority, to managing goals and checklists, tracking deadlines, and seeing their progress over time.</p>
+            <figure class="cs-figure">
+              <img src="assets/breadcrumb-lofi.png" alt="Low-fidelity wireframes of six Breadcrumb screens: Home, Goals, Goal details/Tasks, My Day, Deadlines, and Progress">
+            </figure>
+          `
+        },
+        {
+          eyebrow: "10 / mid-fidelity",
+          title: "Mid-Fidelity",
+          body: `
+            <p class="overlay-p">To further develop the concept and define Breadcrumb's key user flows, I created a medium-fidelity prototype focused on setting career goals, managing daily tasks, tracking progress, personalizing career interests, and accessing AI-powered guidance. These screens helped establish the app's information hierarchy, navigation, and interactions before moving into higher-fidelity design.</p>
+            <figure class="cs-figure">
+              <img src="assets/breadcrumb-midfi.png" alt="Medium-fidelity Breadcrumb screens: Settings, Today, Create a Goal, Progress, and AI Assistant">
+            </figure>
+          `
+        },
+        {
+          eyebrow: "11 / final design",
+          title: "Final Design: Key Features",
+          body: `
+            <p class="overlay-p">The final design brings Breadcrumb's goal-setting experience to life through a warm, encouraging, and low-pressure interface designed to make large goals feel more manageable. The experience combines structured goal planning with progress visualization, personalized next steps, and playful motivation to help users stay consistent without feeling overwhelmed. The final high-fidelity prototype uses a clean card-based interface, accessible visual hierarchy, and Breadcrumb's warm orange and yellow visual identity to create a friendly productivity experience.</p>
+            <p class="overlay-p"><strong>Key features include:</strong></p>
+            <ul class="cs-list">
+              <li><strong>Goal creation</strong> with auto-generated checklists to break larger goals, such as internship applications, research, scholarships, and personal projects, into smaller, actionable steps.</li>
+              <li><strong>Personalized daily next steps</strong> to surface one clear task at a time based on the user's goals, priorities, and deadlines.</li>
+              <li><strong>Goal and task tracking</strong> with deadlines, priorities, estimated completion times, and visual progress indicators to help users understand what to work on next.</li>
+              <li><strong>Progress insights and productivity tracking</strong> through completion statistics, streaks, weekly activity, and a productivity heatmap.</li>
+              <li><strong>Achievement badges</strong> that celebrate milestones such as completing a first task, finishing a goal, maintaining a streak, or reaching task milestones.</li>
+              <li><strong>Breadcrumb Assistant</strong> to provide personalized guidance, answer questions, and help users break overwhelming goals into manageable next steps.</li>
+              <li><strong>Personalized career interests and preferences</strong> to tailor the experience around each user's academic and professional goals.</li>
+            </ul>
+            <figure class="cs-figure">
+              <img src="assets/breadcrumb-final-design.png" alt="Final high-fidelity Breadcrumb screens: onboarding and auth, Today, Settings, career interests, Goals, goal creation and detail, checklist, Progress, productivity heatmap, achievements, and the Breadcrumb Assistant">
+            </figure>
+          `
+        },
+        {
+          eyebrow: "12 / tech stack",
+          title: "Every layer, and why it's there",
+          body: `
+            <p class="overlay-p">Chosen for one deployable unit that covers web, API, and (via a thin native shell) mobile, without a separate backend service to run and monitor.</p>
+            <p class="overlay-p"><strong>Frontend</strong></p>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <tr><th>Tool</th><th>Why</th></tr>
+                <tr><td>Next.js 16 (App Router)</td><td>Server components, file-based routing, and API routes in one deployable</td></tr>
+                <tr><td>React 19 · TypeScript 5</td><td>End-to-end type safety, including hand-maintained DB types</td></tr>
+                <tr><td>Tailwind CSS 4</td><td>Utility-first styling, no per-component CSS files</td></tr>
+                <tr><td>shadcn/ui on Base UI</td><td>Accessible primitives, full control of markup (not Radix)</td></tr>
+                <tr><td>Recharts, react-day-picker</td><td>Weekly activity chart, deadline pickers</td></tr>
+              </table>
+            </div>
+            <p class="overlay-p"><strong>Data & auth</strong></p>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <tr><th>Tool</th><th>Why</th></tr>
+                <tr><td>Supabase Postgres</td><td>Managed Postgres with row-level security per user</td></tr>
+                <tr><td>Supabase Auth (@supabase/ssr)</td><td>Cookie-based sessions that work correctly with SSR</td></tr>
+                <tr><td>Supabase Storage</td><td>User-uploaded profile avatars</td></tr>
+                <tr><td>SWR</td><td>Client-side caching/revalidation for goals and tasks</td></tr>
+                <tr><td>ics</td><td>Generates .ics files for calendar export</td></tr>
+              </table>
+            </div>
+            <p class="overlay-p"><strong>AI</strong></p>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <tr><th>Tool</th><th>Why</th></tr>
+                <tr><td>Google Gemini (@google/genai)</td><td>Powers the in-app assistant, default model gemini-flash-latest</td></tr>
+                <tr><td>Context-aware prompting</td><td>The assistant reads the user's real goals/tasks before responding</td></tr>
+              </table>
+            </div>
+            <p class="overlay-p"><strong>Mobile</strong></p>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <tr><th>Tool</th><th>Why</th></tr>
+                <tr><td>Expo SDK 54</td><td>Chosen to match the tester's installed Expo Go client version</td></tr>
+                <tr><td>React Native + react-native-webview</td><td>A thin native shell wrapping the same web app, no UI rewrite</td></tr>
+                <tr><td>react-native-safe-area-context</td><td>Correct notch/home-indicator handling on iOS</td></tr>
+              </table>
+            </div>
+            <p class="overlay-p"><strong>Tooling, deployment & extras</strong></p>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <tr><th>Tool</th><th>Why</th></tr>
+                <tr><td>Vercel</td><td>Production hosting for the Next.js app</td></tr>
+                <tr><td>GitHub</td><td>Source control, public repository</td></tr>
+                <tr><td>ESLint 9, tsx</td><td>Linting; running the TS seed script outside Next.js</td></tr>
+                <tr><td>canvas-confetti</td><td>Completion celebration on finishing a task/goal</td></tr>
+                <tr><td>sonner</td><td>Toast notifications</td></tr>
+                <tr><td>next-themes</td><td>System-aware dark/light mode</td></tr>
+              </table>
+            </div>
+          `
+        },
+        {
+          eyebrow: "13 / architecture",
+          title: "One deployable, three surfaces",
+          body: `
+            <p class="overlay-p">The mobile app isn't a rewrite, it's a native shell around the same web app, so there's one codebase and one set of features to maintain.</p>
+            <p class="overlay-p"><strong>Clients</strong></p>
+            <ul class="cs-list">
+              <li><strong>Browser:</strong> any device, any OS</li>
+              <li><strong>Expo Go:</strong> iOS / Android WebView shell</li>
+            </ul>
+            <p class="overlay-p"><strong>Application</strong></p>
+            <ul class="cs-list">
+              <li><strong>Next.js App Router:</strong> server components + client components</li>
+              <li><strong>src/proxy.ts:</strong> session refresh + route guards</li>
+              <li><strong>/api/assistant:</strong> Gemini chat endpoint</li>
+              <li><strong>/api/avatar:</strong> Storage upload endpoint</li>
+            </ul>
+            <p class="overlay-p"><strong>Data & AI</strong></p>
+            <ul class="cs-list">
+              <li><strong>Supabase:</strong> Postgres · Auth · Storage, RLS scoped per user</li>
+              <li><strong>Google Gemini:</strong> chat assistant</li>
+            </ul>
+          `
+        },
+        {
+          eyebrow: "14 / features",
+          title: "What's actually in the app",
+          body: `
+            <ul class="cs-list">
+              <li><strong>Today:</strong> one personalized next-action card, the soonest/highest-priority task across all active goals, plus what else is due and a preview of upcoming deadlines.</li>
+              <li><strong>Goals:</strong> searchable, filterable goal cards. Each opens into a full checklist with add/edit/reorder (drag-and-drop)/complete/delete, and new goals get a category-tailored starter checklist.</li>
+              <li><strong>Progress:</strong> a weekly completed-task chart, day streaks, a GitHub-style productivity heatmap, overall completion rate, and unlockable achievement badges.</li>
+              <li><strong>AI assistant:</strong> a Gemini-powered chat mascot with real context on the user's goals and tasks, not a generic chatbot bolted on the side.</li>
+              <li><strong>Auth & onboarding:</strong> email/password sign-up with password reset, a 3-step onboarding flow, and a picker for profile avatars.</li>
+              <li><strong>Calendar export:</strong> download any goal, or all upcoming deadlines, as an .ics file that imports into Google/Apple/Outlook calendars.</li>
+              <li><strong>Notifications:</strong> an in-app reminders bell plus optional native browser notifications for tasks/goals due soon.</li>
+              <li><strong>Cross-platform:</strong> fully responsive from phone to desktop in the browser, plus a real installable iOS/Android shell via Expo Go.</li>
+            </ul>
+          `
+        },
+        {
+          eyebrow: "15 / data model",
+          title: "Four tables, one view, RLS everywhere",
+          body: `
+            <p class="overlay-p">Every table is scoped to auth.uid(), the database enforces access control, so there's no app-level permission logic duplicating what Postgres already guarantees.</p>
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <tr><th>Table</th><th>Purpose</th><th>Key columns</th></tr>
+                <tr><td>profiles</td><td>One row per user, auto-created on sign-up via a trigger</td><td>full_name, school, career_interests[], avatar_url, onboarding_completed, reminder_days_before</td></tr>
+                <tr><td>goals</td><td>Things a user is working toward</td><td>title, category, organization, deadline, status, priority, color_key</td></tr>
+                <tr><td>tasks</td><td>Checklist items belonging to a goal</td><td>goal_id, title, due_date, estimated_minutes, priority, status, position, completed_at</td></tr>
+                <tr><td>user_badges</td><td>Earned achievement badges</td><td>badge_key, earned_at, unique per (user_id, badge_key)</td></tr>
+                <tr><td>daily_completions</td><td>View aggregating completed tasks per user per day</td><td>Powers the streak calculation and the productivity heatmap</td></tr>
+              </table>
+            </div>
+          `
+        },
+        {
+          eyebrow: "16 / process",
+          title: "The order things actually happened in",
+          body: `
+            <p class="overlay-p">Built in phases, each one shippable on its own before moving to the next, data layer first, polish and platform reach last.</p>
+            <ul class="cs-list">
+              <li><strong>1. Design system & schema:</strong> theme tokens, fonts, dark-mode base, and the Postgres schema with row-level security, before any UI, so every screen after this had real data to render.</li>
+              <li><strong>2. Auth & app shell:</strong> email/password auth, onboarding flow, and the responsive shell (desktop sidebar, mobile bottom tabs) that every other screen lives inside.</li>
+              <li><strong>3. Today, Goals, Progress:</strong> the three core screens: the next-action algorithm, the goal checklist with drag-and-drop, and the streak/heatmap/badge system.</li>
+              <li><strong>4. Calendar export & notifications:</strong> .ics generation for deadlines, plus an in-app reminders bell and optional browser notifications.</li>
+              <li><strong>5. Visual reskin:</strong> a full pass to the current dark-neon identity, warm amber brand mark, hot-pink accent, replacing the initial default styling.</li>
+              <li><strong>6. AI assistant & avatars:</strong> replaced a half-wired Google OAuth button with a Gemini-powered assistant that has real context on the user's data, plus a profile avatar picker.</li>
+              <li><strong>7. Mobile shell:</strong> an Expo/React Native WebView wrapper so the same app installs and runs on a real phone via Expo Go, chosen over a full React Native rewrite to avoid duplicating every screen.</li>
+              <li><strong>8. Ship it:</strong> public GitHub repo, MIT license, a detailed README, and a live production deployment on Vercel.</li>
+            </ul>
+          `
+        }
+      ]
     },
     {
       title: "Project Three",
@@ -1478,7 +2031,7 @@
     // and it fills the whole card with that photo/screenshot automatically
     if(p.image){
       return `
-        <span class="project-badge">${p.type}</span>
+        <span class="project-badge${p.badgeAlign === 'right' ? ' badge-right' : ''}">${p.type}</span>
         <img class="project-photo" src="${p.image}" alt="${p.title}" style="object-position:${p.imagePosition || 'center'};">
       `;
     }
@@ -1499,9 +2052,12 @@
 
   // build the project cards (bento sizes come from each project's "size" field above)
   PROJECTS.forEach((p, i) => {
+    const item = document.createElement('div');
+    item.className = 'project-item reveal';
+    item.style.transitionDelay = `${i * 70}ms`;
+
     const card = document.createElement('button');
-    card.className = 'project-card reveal';
-    card.style.transitionDelay = `${i * 70}ms`;
+    card.className = 'project-card';
     card.setAttribute('type', 'button');
     card.innerHTML = `
       ${mockupHTML(p)}
@@ -1517,7 +2073,18 @@
       </div>
     `;
     card.addEventListener('click', () => openProject(i));
-    mount.appendChild(card);
+    item.appendChild(card);
+
+    // links: set a "links" array on any project (see PROJECTS list) to show
+    // buttons like "live app" / "source on github" outside the clickable card
+    if(p.links && p.links.length){
+      const linksRow = document.createElement('div');
+      linksRow.className = 'card-links';
+      linksRow.innerHTML = p.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label} ↗</a>`).join('');
+      item.appendChild(linksRow);
+    }
+
+    mount.appendChild(item);
   });
 
   function openProject(i){
@@ -1626,25 +2193,20 @@
   document.getElementById('aboutClose').addEventListener('click', closeAbout);
   aboutOverlay.addEventListener('click', e => { if(e.target === aboutOverlay) closeAbout(); });
 
+  const lensOverlay = document.getElementById('lensOverlay');
+  const openLens = () => openOverlay(lensOverlay);
+  const closeLens = () => closeOverlay(lensOverlay);
+  document.getElementById('navLensLink').addEventListener('click', e => { e.preventDefault(); openLens(); });
+  const mobileLensLink = document.getElementById('mobileLensLink');
+  if(mobileLensLink) mobileLensLink.addEventListener('click', e => { e.preventDefault(); openLens(); });
+  document.getElementById('lensClose').addEventListener('click', closeLens);
+  lensOverlay.addEventListener('click', e => { if(e.target === lensOverlay) closeLens(); });
+
   window.addEventListener('keydown', e => {
     if(e.key !== 'Escape') return;
     if(overlay.classList.contains('open')) closeProject();
     if(aboutOverlay.classList.contains('open')) closeAbout();
-  });
-
-  // ---- hero footnote reveal: hover on desktop, tap on touch ----
-  const allRevealItems = document.querySelectorAll('.hero-reveal-item');
-  document.querySelectorAll('.fn').forEach(fn => {
-    const target = document.querySelector(`.hero-reveal-item[data-fn="${fn.dataset.fn}"]`);
-    if(!target) return;
-    fn.addEventListener('mouseenter', () => target.classList.add('active'));
-    fn.addEventListener('mouseleave', () => target.classList.remove('active'));
-    fn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const alreadyActive = target.classList.contains('active');
-      allRevealItems.forEach(item => item.classList.remove('active'));
-      if(!alreadyActive) target.classList.add('active');
-    });
+    if(lensOverlay.classList.contains('open')) closeLens();
   });
 
   // ---- nav bubble (glassy hover pill) ----
@@ -1723,7 +2285,7 @@
         r.alpha *= 0.985; // slow fade
         ctx.beginPath();
         ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(94,92,230,${r.alpha})`;
+        ctx.strokeStyle = `rgba(0,113,227,${r.alpha})`;
         ctx.lineWidth = 1.2;
         ctx.stroke();
       });
@@ -1767,13 +2329,13 @@
   // the small "currently ___" tag on the page (kept in sync).
   // ============================================================
   (function initDynamicTitle(){
-    const VERBS = ["designing", "building", "deploying", "drawing", "performing on stage"];
-    const PREFIX = "currently ";
+    const VERBS = ["Designing", "Building", "Deploying", "Drawing", "Performing On Stage"];
+    const PREFIX = "Currently ";
     const cycleTextEl = document.getElementById('cycleText');
     let verbIndex = 0;
 
     function render(word){
-      document.title = `maia is ${word}`;
+      document.title = `Maia is ${word}`;
       if(cycleTextEl) cycleTextEl.textContent = PREFIX + word;
     }
 
