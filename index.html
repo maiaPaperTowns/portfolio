@@ -650,6 +650,18 @@
   }
   .cs-compare-col-title.pros{ color:#1a9c53; }
   .cs-compare-col-title.cons{ color:#e0483e; }
+  .cs-compare-stack{ border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  .cs-compare-row{ padding:16px 18px; border-bottom:1px solid var(--line); }
+  .cs-compare-row:last-child{ border-bottom:none; }
+  .cs-compare-row .cs-compare-grid{ gap:14px; margin-top:10px; }
+  .cs-compare-row .cs-compare-header{ margin-bottom:6px; gap:10px; }
+  .cs-compare-row .cs-compare-icon{ width:32px; height:32px; border-radius:9px; font-size:0.85rem; }
+  .cs-compare-row .cs-bug-title{ font-size:0.9rem; }
+  .cs-compare-row .overlay-p{ font-size:0.85rem; margin-bottom:0; }
+  .cs-compare-row .cs-compare-col-title{ font-size:0.8rem; margin-bottom:5px; }
+  .cs-compare-row .cs-list{ font-size:0.8rem; margin:0 0 0 16px; }
+  .cs-compare-row .cs-list li{ margin-bottom:5px; }
+  .cs-split--top{ align-items:start; }
   .cs-gap-box{
     border:1px solid var(--accent); background:rgba(0,113,227,0.05);
     border-radius:14px; padding:22px; margin-top:8px;
@@ -701,7 +713,6 @@
   }
   .cs-figure img{
     width:100%; height:auto; display:block;
-    border-radius:14px; border:1px solid var(--line);
   }
   .cs-figure figcaption{
     margin-top:10px; text-align:center;
@@ -716,16 +727,48 @@
   .cs-embed-wrap.tall{ aspect-ratio:auto; height:640px; }
   .cs-embed-wrap iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
 
-  /* left-side scroll progress bar, one tick per case-study section (desktop only) */
+  /* left-side scroll progress bar, one tick per case-study section (desktop only) —
+     click or hover to reveal a jump-to-section table of contents */
   .cs-progress{
     position:fixed; left:28px; top:50%; transform:translateY(-50%);
-    display:flex; flex-direction:column; gap:11px; z-index:6;
+    z-index:210;
   }
-  .cs-progress .tick{
+  .cs-progress-ticks{
+    display:flex; flex-direction:column; gap:11px;
+    cursor:pointer; padding:10px 6px;
+  }
+  .cs-progress-ticks .tick{
     width:18px; height:2px; background:var(--line);
-    transition:width .25s ease, background .25s ease;
+    transition:width .2s ease, background .2s ease;
   }
-  .cs-progress .tick.active{ width:32px; background:var(--ink); }
+  .cs-progress-ticks:hover .tick{ background:var(--ink); }
+  .cs-progress-ticks .tick:hover{ width:32px; }
+  .cs-toc-panel{
+    position:absolute; left:100%; top:50%; margin-left:2px;
+    transform:translate(0,-50%);
+    background:#fff; border:1px solid var(--line); border-radius:18px;
+    padding:18px 24px; min-width:230px;
+    box-shadow:0 24px 48px -18px rgba(0,0,0,0.22);
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity .18s ease, transform .18s ease, visibility .18s;
+  }
+  .cs-progress:hover .cs-toc-panel,
+  .cs-progress.open .cs-toc-panel{
+    opacity:1; visibility:visible; pointer-events:auto;
+    transform:translate(6px,-50%);
+  }
+  .cs-toc-eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:0.68rem; text-transform:uppercase;
+    letter-spacing:0.06em; color:var(--ink-soft); margin-bottom:10px;
+  }
+  .cs-toc-item{
+    display:block; width:100%; text-align:left;
+    background:none; border:none; padding:6px 0;
+    font-family:'Afacad Flux', sans-serif; font-size:0.98rem; color:var(--ink-soft);
+    cursor:pointer; white-space:nowrap; transition:color .15s ease;
+  }
+  .cs-toc-item:hover{ color:var(--accent); }
+  .cs-toc-item.active{ color:var(--ink); font-weight:700; }
   @media(max-width:1080px){ .cs-progress{ display:none; } }
 
   .contact-footer{
@@ -1091,9 +1134,18 @@
     <span class="eyebrow" style="margin:0;">case study</span>
     <button class="overlay-close" id="overlayClose">close ✕</button>
   </div>
-  <div class="cs-progress" id="csProgress"></div>
   <div class="overlay-body" id="overlayBody">
     <!-- filled by JS when a project card is clicked -->
+  </div>
+</div>
+
+<!-- lives outside .overlay so its position:fixed is relative to the real viewport,
+     not to .overlay's own transformed (translateY) box during the open/close animation -->
+<div class="cs-progress" id="csProgress">
+  <div class="cs-progress-ticks" id="csProgressTicks"></div>
+  <div class="cs-toc-panel">
+    <div class="cs-toc-eyebrow">Contents</div>
+    <div id="csTocList"></div>
   </div>
 </div>
 
@@ -1567,93 +1619,99 @@
           eyebrow: "03 / competitive analysis",
           title: "Where existing tools fall short",
           body: `
-            <p class="overlay-p">After conducting a competitive analysis of other major productivity and career-planning platforms, including Notion, Todoist, and Handshake, common strengths emerged: flexible organization, task and deadline management, and career opportunity discovery. However, these tools often require students to manually turn opportunities into actionable plans.</p>
-
-            <div class="cs-bug">
-              <div class="cs-compare-header">
-                <div class="cs-compare-icon" style="background:#000; color:#fff;">N</div>
-                <div class="cs-bug-title" style="margin-bottom:0;">Notion</div>
+            <div class="cs-split cs-split--top">
+              <div>
+                <h4 class="cs-subhead" style="margin-top:0;">Competitive Analysis</h4>
+                <p class="overlay-p">After conducting a competitive analysis of other major productivity and career-planning platforms, including Notion, Todoist, and Handshake, common strengths emerged: flexible organization, task and deadline management, and career opportunity discovery. However, these tools often require students to manually turn opportunities into actionable plans.</p>
               </div>
-              <p class="overlay-p">Notion is a flexible productivity workspace that students often use to organize applications, projects, deadlines, notes, and personal goals.</p>
-              <div class="cs-compare-grid">
-                <div>
-                  <div class="cs-compare-col-title pros">+ Pros</div>
-                  <ul class="cs-list">
-                    <li><strong>Highly customizable</strong> databases, templates, and dashboards</li>
-                    <li>Can organize internships, research, scholarships, and projects in <strong>one workspace</strong></li>
-                    <li>Strong <strong>collaboration</strong> and documentation features</li>
-                    <li>Large ecosystem of student <strong>productivity templates</strong></li>
-                  </ul>
+              <div class="cs-compare-stack">
+                <div class="cs-compare-row">
+                  <div class="cs-compare-header">
+                    <div class="cs-compare-icon" style="background:#000; color:#fff;">N</div>
+                    <div class="cs-bug-title" style="margin-bottom:0;">Notion</div>
+                  </div>
+                  <p class="overlay-p">Notion is a flexible productivity workspace that students often use to organize applications, projects, deadlines, notes, and personal goals.</p>
+                  <div class="cs-compare-grid">
+                    <div>
+                      <div class="cs-compare-col-title pros">+ Pros</div>
+                      <ul class="cs-list">
+                        <li><strong>Highly customizable</strong> databases, templates, and dashboards</li>
+                        <li>Can organize internships, research, scholarships, and projects in <strong>one workspace</strong></li>
+                        <li>Strong <strong>collaboration</strong> and documentation features</li>
+                        <li>Large ecosystem of student <strong>productivity templates</strong></li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div class="cs-compare-col-title cons">− Cons</div>
+                      <ul class="cs-list">
+                        <li>Requires significant <strong>manual setup</strong> and maintenance</li>
+                        <li>Doesn't automatically determine <strong>what a student should work on next</strong></li>
+                        <li>Flexibility can create complex dashboards and <strong>information overload</strong></li>
+                        <li>No student <strong>opportunity-specific checklist</strong> generation by default</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div class="cs-compare-col-title cons">− Cons</div>
-                  <ul class="cs-list">
-                    <li>Requires significant <strong>manual setup</strong> and maintenance</li>
-                    <li>Doesn't automatically determine <strong>what a student should work on next</strong></li>
-                    <li>Flexibility can create complex dashboards and <strong>information overload</strong></li>
-                    <li>No student <strong>opportunity-specific checklist</strong> generation by default</li>
-                  </ul>
+
+                <div class="cs-compare-row">
+                  <div class="cs-compare-header">
+                    <div class="cs-compare-icon" style="background:#E44332; color:#fff;">✓</div>
+                    <div class="cs-bug-title" style="margin-bottom:0;">Todoist</div>
+                  </div>
+                  <p class="overlay-p">Todoist is a task and project management app for organizing personal and professional tasks using projects, priorities, labels, and deadlines.</p>
+                  <div class="cs-compare-grid">
+                    <div>
+                      <div class="cs-compare-col-title pros">+ Pros</div>
+                      <ul class="cs-list">
+                        <li>Fast and <strong>intuitive</strong> task creation</li>
+                        <li>Strong <strong>recurring tasks</strong>, priorities, and reminders</li>
+                        <li><strong>Productivity tracking</strong> and completion history</li>
+                        <li>Works across <strong>web and mobile</strong> platforms</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div class="cs-compare-col-title cons">− Cons</div>
+                      <ul class="cs-list">
+                        <li>Primarily <strong>task-focused</strong> rather than goal-focused</li>
+                        <li>Users still have to determine and <strong>create most tasks themselves</strong></li>
+                        <li>Doesn't <strong>understand the context</strong> of goals like internships or scholarships</li>
+                        <li><strong>Limited guidance</strong> for multi-step student application processes</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cs-compare-row">
+                  <div class="cs-compare-header">
+                    <div class="cs-compare-icon" style="background:#1F5DF2; color:#fff; font-size:0.85rem;">hi</div>
+                    <div class="cs-bug-title" style="margin-bottom:0;">Handshake</div>
+                  </div>
+                  <p class="overlay-p">Handshake is a career platform designed for college students to discover internships, jobs, employers, and career opportunities.</p>
+                  <div class="cs-compare-grid">
+                    <div>
+                      <div class="cs-compare-col-title pros">+ Pros</div>
+                      <ul class="cs-list">
+                        <li>Built <strong>specifically for college students</strong></li>
+                        <li><strong>Personalized</strong> internship and job discovery</li>
+                        <li>University and employer <strong>integrations</strong></li>
+                        <li><strong>Centralizes</strong> career opportunities and application information</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div class="cs-compare-col-title cons">− Cons</div>
+                      <ul class="cs-list">
+                        <li>Focused primarily on <strong>internships and jobs</strong></li>
+                        <li>Doesn't manage research, scholarships, hackathons, or <strong>other student goals</strong></li>
+                        <li>Limited <strong>post-discovery planning</strong> and task management</li>
+                        <li>Students often still need <strong>external calendars</strong>, spreadsheets, or task apps to manage applications</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="cs-bug">
-              <div class="cs-compare-header">
-                <div class="cs-compare-icon" style="background:#E44332; color:#fff;">✓</div>
-                <div class="cs-bug-title" style="margin-bottom:0;">Todoist</div>
-              </div>
-              <p class="overlay-p">Todoist is a task and project management app for organizing personal and professional tasks using projects, priorities, labels, and deadlines.</p>
-              <div class="cs-compare-grid">
-                <div>
-                  <div class="cs-compare-col-title pros">+ Pros</div>
-                  <ul class="cs-list">
-                    <li>Fast and <strong>intuitive</strong> task creation</li>
-                    <li>Strong <strong>recurring tasks</strong>, priorities, and reminders</li>
-                    <li><strong>Productivity tracking</strong> and completion history</li>
-                    <li>Works across <strong>web and mobile</strong> platforms</li>
-                  </ul>
-                </div>
-                <div>
-                  <div class="cs-compare-col-title cons">− Cons</div>
-                  <ul class="cs-list">
-                    <li>Primarily <strong>task-focused</strong> rather than goal-focused</li>
-                    <li>Users still have to determine and <strong>create most tasks themselves</strong></li>
-                    <li>Doesn't <strong>understand the context</strong> of goals like internships or scholarships</li>
-                    <li><strong>Limited guidance</strong> for multi-step student application processes</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div class="cs-bug">
-              <div class="cs-compare-header">
-                <div class="cs-compare-icon" style="background:#1F5DF2; color:#fff; font-size:0.85rem;">hi</div>
-                <div class="cs-bug-title" style="margin-bottom:0;">Handshake</div>
-              </div>
-              <p class="overlay-p">Handshake is a career platform designed for college students to discover internships, jobs, employers, and career opportunities.</p>
-              <div class="cs-compare-grid">
-                <div>
-                  <div class="cs-compare-col-title pros">+ Pros</div>
-                  <ul class="cs-list">
-                    <li>Built <strong>specifically for college students</strong></li>
-                    <li><strong>Personalized</strong> internship and job discovery</li>
-                    <li>University and employer <strong>integrations</strong></li>
-                    <li><strong>Centralizes</strong> career opportunities and application information</li>
-                  </ul>
-                </div>
-                <div>
-                  <div class="cs-compare-col-title cons">− Cons</div>
-                  <ul class="cs-list">
-                    <li>Focused primarily on <strong>internships and jobs</strong></li>
-                    <li>Doesn't manage research, scholarships, hackathons, or <strong>other student goals</strong></li>
-                    <li>Limited <strong>post-discovery planning</strong> and task management</li>
-                    <li>Students often still need <strong>external calendars</strong>, spreadsheets, or task apps to manage applications</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div class="cs-gap-box">
+            <div class="cs-gap-box" style="margin-top:28px;">
               <div class="cs-gap-title">Market Gap → <span>Breadcrumb</span></div>
               <p class="overlay-p">Existing products solve individual pieces of the student planning journey, but students still have to manually translate opportunities into deadlines, tasks, and priorities. This revealed an opportunity for Breadcrumb to combine goal-specific checklists, deadline tracking, progress insights, and AI-powered guidance while surfacing one clear next step to reduce decision fatigue.</p>
               <div class="cs-gap-tags">
@@ -2143,34 +2201,60 @@
   // ---- left-side scroll progress bar (one tick per case-study section) ----
   function setupProgressBar(){
     const progressEl = document.getElementById('csProgress');
+    const ticksEl = document.getElementById('csProgressTicks');
+    const tocListEl = document.getElementById('csTocList');
     const sectionEls = overlayBody.querySelectorAll('.overlay-section');
-    progressEl.innerHTML = '';
+    ticksEl.innerHTML = '';
+    tocListEl.innerHTML = '';
+    progressEl.classList.remove('open');
 
-    if(sectionEls.length < 2){ return; } // not worth a progress bar for 1 section
+    if(sectionEls.length < 2){ progressEl.style.display = 'none'; return; } // not worth a progress bar for 1 section
+    progressEl.style.display = '';
 
-    sectionEls.forEach((_, idx) => {
+    function jumpTo(idx){
+      sectionEls[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      progressEl.classList.remove('open');
+    }
+
+    sectionEls.forEach((sec, idx) => {
       const tick = document.createElement('div');
       tick.className = 'tick';
       tick.dataset.index = idx;
-      tick.addEventListener('click', () => {
-        sectionEls[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-      progressEl.appendChild(tick);
+      ticksEl.appendChild(tick);
+
+      const titleEl = sec.querySelector('.overlay-h3');
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'cs-toc-item';
+      item.dataset.index = idx;
+      item.textContent = titleEl ? titleEl.textContent : `Section ${idx + 1}`;
+      item.addEventListener('click', (e) => { e.stopPropagation(); jumpTo(idx); });
+      tocListEl.appendChild(item);
     });
 
-    const ticks = progressEl.querySelectorAll('.tick');
+    // clicking anywhere on the tick column opens the contents panel to jump fast
+    // (.onclick, not addEventListener, so re-opening a project doesn't stack duplicate handlers)
+    ticksEl.onclick = () => progressEl.classList.toggle('open');
+
+    const ticks = ticksEl.querySelectorAll('.tick');
+    const tocItems = tocListEl.querySelectorAll('.cs-toc-item');
     function updateActiveTick(){
       let activeIndex = 0;
       sectionEls.forEach((sec, idx) => {
         if(sec.getBoundingClientRect().top < 160) activeIndex = idx;
       });
       ticks.forEach((t, idx) => t.classList.toggle('active', idx === activeIndex));
+      tocItems.forEach((t, idx) => t.classList.toggle('active', idx === activeIndex));
     }
     updateActiveTick();
     overlay.removeEventListener('scroll', overlay._progressHandler || (()=>{}));
     overlay._progressHandler = updateActiveTick;
     overlay.addEventListener('scroll', updateActiveTick);
   }
+  document.addEventListener('click', (e) => {
+    const progressEl = document.getElementById('csProgress');
+    if(progressEl && !progressEl.contains(e.target)) progressEl.classList.remove('open');
+  });
 
   // ---- generic overlay open/close (used by project case studies + about) ----
   function openOverlay(el){
@@ -2181,6 +2265,8 @@
   function closeOverlay(el){
     el.classList.remove('open');
     document.body.style.overflow = '';
+    const progressEl = document.getElementById('csProgress');
+    if(progressEl){ progressEl.classList.remove('open'); progressEl.style.display = 'none'; }
   }
   function closeProject(){ closeOverlay(overlay); }
 
