@@ -319,13 +319,18 @@
     border-radius:var(--radius);
     aspect-ratio:4/3;
     background:var(--paper-2);
-    border:1.5px dashed var(--line);
+    border:1px solid var(--line);
     display:flex; align-items:center; justify-content:center;
     text-align:center; padding:24px;
     font-family:'JetBrains Mono', monospace; font-size:0.8rem;
     color:var(--ink-soft);
+    overflow:hidden;
   }
   .about-photo img{ width:100%; height:100%; object-fit:cover; border-radius:calc(var(--radius) - 1px); }
+  .about-photo-caption{
+    margin-top:10px; text-align:center;
+    font-family:'JetBrains Mono', monospace; font-size:0.78rem; color:var(--ink-soft);
+  }
 
   .exp-grid{
     display:grid; grid-template-columns:1fr 1fr; gap:56px;
@@ -371,7 +376,13 @@
   }
   .tech-strip-heading{
     font-family:'Libre Baskerville', serif; font-style:italic; font-weight:400; font-size:1.2rem;
-    margin-bottom:20px;
+    margin-bottom:24px;
+  }
+  .tech-row{ margin-bottom:26px; }
+  .tech-row:last-child{ margin-bottom:0; }
+  .tech-row-label{
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem; text-transform:uppercase;
+    letter-spacing:0.06em; color:var(--accent); margin-bottom:12px;
   }
   .tech-marquee{
     overflow:hidden;
@@ -379,22 +390,32 @@
     mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   }
   .tech-track{
-    display:flex; gap:52px; width:max-content;
-    animation:tech-scroll 32s linear infinite;
+    display:flex; gap:44px; width:max-content;
+    animation:tech-scroll 38s linear infinite;
   }
+  .tech-track.reverse{ animation-name:tech-scroll-reverse; }
   .tech-marquee:hover .tech-track{ animation-play-state:paused; }
   @keyframes tech-scroll{
     from{ transform:translateX(0); }
     to{ transform:translateX(-50%); }
   }
+  @keyframes tech-scroll-reverse{
+    from{ transform:translateX(-50%); }
+    to{ transform:translateX(0); }
+  }
   .tech-chip{
     display:flex; flex-direction:column; align-items:center; gap:10px;
-    flex-shrink:0; width:64px;
+    flex-shrink:0; width:74px;
   }
-  .tech-chip img{ width:38px; height:38px; object-fit:contain; }
+  .tech-chip img{ width:34px; height:34px; object-fit:contain; }
+  .tech-chip-badge{
+    width:34px; height:34px; border-radius:9px;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:0.68rem; letter-spacing:0.01em;
+  }
   .tech-chip span{
-    font-family:'JetBrains Mono', monospace; font-size:0.74rem;
-    color:var(--ink-soft); white-space:nowrap;
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem;
+    color:var(--ink-soft); white-space:nowrap; text-align:center;
   }
   @media(prefers-reduced-motion: reduce){
     .tech-track{ animation:none; }
@@ -504,6 +525,10 @@
 
   .project-meta{ margin-top:16px; display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
   .project-title{ font-family:'Libre Baskerville', serif; font-style:italic; font-weight:400; font-size:1.3rem; }
+  .project-type-inline{
+    font-family:'JetBrains Mono', monospace; font-style:normal; font-size:0.7rem;
+    color:var(--ink-soft); vertical-align:middle; margin-left:8px;
+  }
   .project-desc{ color:var(--ink-soft); margin-top:6px; font-size:0.95rem; max-width:42ch; }
   .project-year{ font-family:'JetBrains Mono', monospace; font-size:0.78rem; color:var(--accent); white-space:nowrap; }
 
@@ -973,23 +998,27 @@
     <div class="about-hero reveal">
       <div>
         <blockquote class="quote-block">
-          <p>"Replace this with a quote that actually means something to you, from a book, a song, a mentor, a movie. Something that hints at how you think about your work."</p>
+          <p>"Fall in love with the problem, not the solution."</p>
         </blockquote>
-        <div class="quote-attr">attribution</div>
+        <div class="quote-attr">Uri Levine</div>
 
         <div class="about-copy">
-          <p>Hi! I'm [your name]. I'm a [your role] studying [your field] at [your school].</p>
-          <p>Write a paragraph here about what you love, the kind of problems that excite you, a thread that runs through your work, or how you got into this in the first place.</p>
-          <p>Close with what you're working toward next: what you want to build, learn, or the kind of impact you want your work to have.</p>
+          <p>Hi! I'm Maia, a Computer Science + Communication student at DePauw University who loves turning messy problems into products that feel simple.</p>
+          <p>I work at the intersection of product, technology, and storytelling, finding the why behind problems and getting hands-on with AI, data, design, and code to turn ideas into something real.</p>
+          <p>Beyond work, I'm the President of Women in Computer Science, a photographer of 5+ years, an art lover, an enthusiastic traveler, and currently learning Chinese.</p>
+          <p>I'm especially curious about AI products and human-centered technology, and I'm working toward becoming a PM who can speak both human and engineer. :)</p>
         </div>
 
         <div class="about-links">
-          <a href="mailto:lmhuong.06@gmail.com">Email</a><span class="sep">·</span><a href="https://www.linkedin.com/in/maia-le-504b41263/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:lmhuong.06@gmail.com">Email</a><span class="sep">·</span><a href="https://www.linkedin.com/in/maia-le-504b41263/" target="_blank" rel="noopener">LinkedIn</a><span class="sep">·</span><a href="https://github.com/maiaPaperTowns" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
 
-      <div class="about-photo">
-        <span>add your photo here, replace this block with an &lt;img&gt; tag pointing to your own picture</span>
+      <div class="about-photo-wrap">
+        <div class="about-photo">
+          <img src="assets/about-photo.jpg" alt="Maia at GHC 2025 with the DePauw Women in Computer Science team">
+        </div>
+        <div class="about-photo-caption">me at GHC 2025 with DePauw Women in CS team</div>
       </div>
     </div>
 
@@ -1073,11 +1102,27 @@
 
 <section class="tech-strip">
   <div class="wrap">
-    <h3 class="tech-strip-heading">tech stack</h3>
-  </div>
-  <div class="tech-marquee">
-    <div class="tech-track" id="techTrack">
-      <!-- filled by JS from the TECH_STACK list below, duplicated once for a seamless loop -->
+    <h3 class="tech-strip-heading">Tech Stack</h3>
+
+    <div class="tech-row">
+      <div class="tech-row-label">Product &amp; Analytics</div>
+      <div class="tech-marquee">
+        <div class="tech-track" id="techTrackProduct"></div>
+      </div>
+    </div>
+
+    <div class="tech-row">
+      <div class="tech-row-label">Technical</div>
+      <div class="tech-marquee">
+        <div class="tech-track reverse" id="techTrackTechnical"></div>
+      </div>
+    </div>
+
+    <div class="tech-row">
+      <div class="tech-row-label">Design &amp; Growth Tools</div>
+      <div class="tech-marquee">
+        <div class="tech-track" id="techTrackDesign"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1228,41 +1273,73 @@
 
 <script>
   // ============================================================
-  // EDIT YOUR TECH STACK HERE — icons come from the Simple Icons
-  // CDN (cdn.simpleicons.org/<slug>), so "slug" just needs to match
-  // a real Simple Icons name. The track is duplicated once in JS
-  // for a seamless infinite scroll.
+  // EDIT YOUR TECH STACK HERE — three rows, one per category.
+  // Each item is either { name, slug } for a real logo (icons come
+  // from the Simple Icons CDN, cdn.simpleicons.org/<slug> — slug
+  // just needs to match a real Simple Icons name) or
+  // { name, initials, bg } for a plain colored badge when no real
+  // logo exists (methodologies, or brands Simple Icons doesn't
+  // carry). Each track is duplicated once in JS for a seamless loop.
   // ============================================================
-  const TECH_STACK = [
+  const TECH_STACK_PRODUCT = [
+    { name: "Jira", slug: "jira" },
+    { name: "Confluence", slug: "confluence" },
+    { name: "Notion", slug: "notion" },
+    { name: "Linear", slug: "linear" },
+    { name: "Excel", initials: "XL", bg: "#217346" },
+    { name: "Tableau", initials: "TB", bg: "#E97627" },
+    { name: "Google Analytics", slug: "googleanalytics" },
+    { name: "Looker Studio", slug: "looker" },
+    { name: "Mixpanel", slug: "mixpanel" }
+  ];
+  const TECH_STACK_TECHNICAL = [
     { name: "Python", slug: "python" },
     { name: "Java", slug: "openjdk" },
     { name: "JavaScript", slug: "javascript" },
     { name: "TypeScript", slug: "typescript" },
     { name: "HTML5", slug: "html5" },
     { name: "CSS3", slug: "css" },
+    { name: "C", slug: "c" },
     { name: "C++", slug: "cplusplus" },
     { name: "React", slug: "react" },
     { name: "Node.js", slug: "nodedotjs" },
     { name: "PHP", slug: "php" },
     { name: "MySQL", slug: "mysql" },
     { name: "Firebase", slug: "firebase" },
+    { name: "AWS", initials: "AWS", bg: "#FF9900" },
+    { name: "Azure", initials: "AZ", bg: "#0078D4" },
     { name: "Git", slug: "git" },
-    { name: "Docker", slug: "docker" },
+    { name: "Docker", slug: "docker" }
+  ];
+  const TECH_STACK_DESIGN = [
     { name: "Figma", slug: "figma" },
-    { name: "Jira", slug: "jira" }
+    { name: "Adobe Creative Suite", initials: "Cc", bg: "#DA1F26" },
+    { name: "WordPress", slug: "wordpress" },
+    { name: "HubSpot", slug: "hubspot" },
+    { name: "Hootsuite", slug: "hootsuite" },
+    { name: "Meltwater", initials: "MW", bg: "#00A4E4" },
+    { name: "Meta Business Suite", slug: "meta" },
+    { name: "LinkedIn", initials: "in", bg: "#0A66C2" }
   ];
 
-  const techTrack = document.getElementById('techTrack');
-  if(techTrack){
-    const chipsHTML = TECH_STACK.map(t => `
+  function renderTechTrack(elementId, items){
+    const track = document.getElementById(elementId);
+    if(!track) return;
+    const chipsHTML = items.map(t => `
       <div class="tech-chip">
-        <img src="https://cdn.simpleicons.org/${t.slug}" alt="${t.name}" onerror="this.parentElement.style.display='none'">
+        ${t.slug
+          ? `<img src="https://cdn.simpleicons.org/${t.slug}" alt="${t.name}" onerror="this.parentElement.replaceChild(Object.assign(document.createElement('div'), {className:'tech-chip-badge', style:'background:#9CA3AF', textContent:'${t.name.slice(0,3).toUpperCase()}'}), this)">`
+          : `<div class="tech-chip-badge" style="background:${t.bg};">${t.initials}</div>`
+        }
         <span>${t.name}</span>
       </div>
     `).join('');
     // duplicated once so the marquee can loop seamlessly at -50%
-    techTrack.innerHTML = chipsHTML + chipsHTML;
+    track.innerHTML = chipsHTML + chipsHTML;
   }
+  renderTechTrack('techTrackProduct', TECH_STACK_PRODUCT);
+  renderTechTrack('techTrackTechnical', TECH_STACK_TECHNICAL);
+  renderTechTrack('techTrackDesign', TECH_STACK_DESIGN);
 
   // ============================================================
   // EDIT YOUR PROJECTS HERE — this is the only part you need to
@@ -1968,17 +2045,141 @@
       ]
     },
     {
-      title: "Project Three",
-      year: "2025",
+      title: "Sidekiq",
+      year: "2026",
       color: "var(--paper-2)",
-      desc: "Short, punchy description of the third project.",
-      tags: ["Swift", "Machine Learning", "iOS"],
-      role: "iOS Developer",
-      timeline: "10 weeks",
-      type: "Coursework",
-      overview: "A short paragraph describing the goal of this project and the outcome. Did it ship, get tested with users, win anything?",
-      approachTitle: "The approach",
-      approach: "Describe your process: research, prototyping, testing, and what changed along the way."
+      image: "assets/sidekiq-cover.png",
+      links: [
+        { label: "live", url: "https://maiapapertowns.github.io/sidekiq/" },
+        { label: "github", url: "https://github.com/maiaPaperTowns/sidekiq" }
+      ],
+      desc: "Your student opportunity sidekick: find it, plan it, finish it. A cross-platform job-discovery app pulling live listings from two real job-board APIs.",
+      tags: ["Expo", "React Native", "Supabase", "GitHub Actions"],
+      role: "Solo Developer",
+      timeline: "Solo project",
+      type: "Mobile & Web App",
+      sections: [
+        {
+          eyebrow: "01 / overview",
+          title: "Find it, plan it, finish it",
+          body: `
+            <a class="cs-link-btn" href="https://maiapapertowns.github.io/sidekiq/" target="_blank" rel="noopener" style="margin-right:10px;">live app ↗</a>
+            <a class="cs-link-btn" href="https://github.com/maiaPaperTowns/sidekiq" target="_blank" rel="noopener">source on github ↗</a>
+            <p class="overlay-p">A cross-platform (iOS / Android / web) job-discovery app for students, built with Expo and React Native, pulling live listings from two real job-board APIs, with a save → plan → track workflow and a CI/CD pipeline that auto-deploys the web build to GitHub Pages.</p>
+            <h4 class="cs-subhead">The Problem</h4>
+            <p class="overlay-p">Job hunting as a student means bouncing between multiple job boards, losing track of what you've applied to, and never actually breaking an application down into steps. Sidekiq collapses that into one flow: discover a real posting, run a 3-question fit check on it, turn it into a plan with a starter task checklist, and watch progress add up on a dashboard.</p>
+          `
+        },
+        {
+          eyebrow: "02 / tech stack",
+          title: "Every layer, and why it's there",
+          body: `
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <tr><th>Layer</th><th>Choice</th><th>Why</th></tr>
+                <tr><td>Framework</td><td>Expo SDK 54 / React Native 0.81</td><td>One codebase → iOS, Android, and web</td></tr>
+                <tr><td>UI</td><td>React 19, StyleSheet, custom design-token system</td><td>No UI kit dependency; full control over the glassmorphic visual style</td></tr>
+                <tr><td>State</td><td>React Context + useReducer</td><td>App is small enough that Redux/Zustand would be overhead; a single reducer covers jobs, saves, plans, and activity</td></tr>
+                <tr><td>Navigation</td><td>Hand-rolled tab state in App.js</td><td>Three tabs, two modals, a router library wasn't earning its weight</td></tr>
+                <tr><td>Data sources</td><td>Greenhouse Job Board API + USAJOBS Search API</td><td>Real listings, not seed data, either source works standalone</td></tr>
+                <tr><td>Auth / sync</td><td>Supabase (@supabase/supabase-js)</td><td>Optional, profile name syncs across devices when signed in; app works fully signed-out</td></tr>
+                <tr><td>Local persistence</td><td>@react-native-async-storage/async-storage</td><td>Backs Supabase's session storage</td></tr>
+                <tr><td>Icons</td><td>@expo/vector-icons (Ionicons)</td><td>—</td></tr>
+                <tr><td>CI/CD</td><td>GitHub Actions</td><td>Build + deploy on every push to main</td></tr>
+                <tr><td>Hosting</td><td>GitHub Pages</td><td>Free, static, zero server to run</td></tr>
+              </table>
+            </div>
+          `
+        },
+        {
+          eyebrow: "03 / architecture",
+          title: "One codebase, source-agnostic screens",
+          body: `
+            <div class="cs-code">App.js                  # Root: splash screen, responsive shell, tab state
+src/
+  store.js               # Global state: reducer + async job fetch + Supabase auth wiring
+  config.js               # Single place that reads every EXPO_PUBLIC_* env var
+  api/
+    greenhouse.js          # Greenhouse fetch + response → common Opportunity shape
+    usajobs.js              # USAJOBS fetch + response → common Opportunity shape
+  screens/
+    DiscoverScreen.js        # Search / filter / sort across both live sources
+    PlansScreen.js            # Saved listings turned into task checklists
+    DashboardScreen.js         # Weekly-goal stats + activity feed
+    OpportunityModal.js         # Listing detail + fit-check questionnaire
+    ProfileModal.js               # Name/photo + optional sign-in
+  components/               # Shared primitives: Card, Button, Tag, ProgressBar, ...
+  theme.js                  # Design tokens: color, spacing, radius, type scale</div>
+            <p class="overlay-p">Two independent job APIs get normalized into one common Opportunity shape in api/, so every downstream screen (Discover, Plans, Dashboard) is source-agnostic, it never has to know or care whether a listing came from Greenhouse or USAJOBS.</p>
+          `
+        },
+        {
+          eyebrow: "04 / features",
+          title: "What's actually in the app",
+          body: `
+            <ul class="cs-list">
+              <li><strong>Discover:</strong> live search, category filters, and newest/A–Z sort across both job APIs at once.</li>
+              <li><strong>Fit check:</strong> a quick self-assessment (timing / materials on hand / genuine interest) attached to each listing, so "should I bother with this one" gets an actual score instead of a gut feeling.</li>
+              <li><strong>Plans:</strong> one tap turns a saved listing into an application plan with an editable starter checklist (tailor résumé → draft cover note → apply → follow up).</li>
+              <li><strong>Dashboard:</strong> tasks completed this week against a goal, saved/active/submitted counts, recent-activity feed.</li>
+              <li><strong>Profile:</strong> editable name and photo (device photo library via expo-image-picker), synced across devices if signed in.</li>
+              <li><strong>Responsive shell:</strong> the exact same screens render full-bleed on phone, in a centered column on tablet/mid-size windows, and inside a "phone on a desk" preview frame on a wide desktop browser, one App.js breakpoint switch, zero per-screen responsive code.</li>
+            </ul>
+          `
+        },
+        {
+          eyebrow: "05 / process",
+          title: "How it was built: the real process",
+          body: `
+            <p class="overlay-p">This wasn't a smooth straight line, and the problem-solving is arguably the more interesting part.</p>
+
+            <div class="cs-bug">
+              <div class="cs-bug-title">1. Metro's CI=1 mode has a sharp edge</div>
+              <p class="overlay-p">Early on, the dev server was set to run with CI=1 to work around a hang. Later, while iterating on the responsive layout, edits stopped showing up on refresh, spent real time ruling out browser caching, service workers, and stale tabs before tracing it to the actual cause: CI=1 doesn't just disable Metro's file-watcher push, it freezes the bundle after the first build and silently serves that frozen version on every subsequent request. Fix was simple once found (drop the flag once the original hang wasn't a risk anymore), but finding it meant methodically eliminating every other explanation first, including patching requestAnimationFrame and inspecting the raw bundle text via curl to prove the server itself was serving fresh code while the browser wasn't executing it.</p>
+            </div>
+
+            <div class="cs-bug">
+              <div class="cs-bug-title">2. Expo Go version drift</div>
+              <p class="overlay-p">The app targeted SDK 57, but the actual Expo Go client published on the App Store was still on SDK 54, a real gap between "latest SDK per Expo's docs" and "what's actually shipped to end users." Rather than wait, downgraded the whole dependency tree (expo, react, react-native, and every expo-* package) using Expo's official compatibility installer, then ran expo-doctor to catch what the installer missed, a duplicate expo-font install and a missing peer dependency, before doing a clean reinstall and re-verifying both the web and native builds still worked.</p>
+            </div>
+
+            <div class="cs-bug">
+              <div class="cs-bug-title">3. GitHub Pages subpath asset resolution</div>
+              <p class="overlay-p">Deploying the web export to github.io/sidekiq/ (a subpath, not domain root) broke the icon fonts with silent 404s. Traced it into the minified production JS bundle itself, Expo's Metro web export bakes an absolute /assets/... URL for every local font asset at build time, which resolves against the domain root regardless of where the page is actually served from. Fixed with a build-step rewrite in the GitHub Actions workflow, but only shipped it after reproducing the exact failure locally (serving the export from a real subpath with a throwaway HTTP server) and confirming the fix worked the same way, rather than trusting it blind in production.</p>
+            </div>
+
+            <div class="cs-bug">
+              <div class="cs-bug-title">4. Secrets vs. local .env</div>
+              <p class="overlay-p">The deployed site initially showed "no job source configured", .env never leaves the machine, so the GitHub Actions build had no API credentials. Fixed by pushing the USAJOBS key/user-agent as encrypted repo secrets and wiring them into the existing workflow's build step, then re-verified by hitting the live USAJOBS endpoint directly from the deployed origin to confirm CORS and the custom headers actually work in production, not just in local dev.</p>
+            </div>
+          `
+        },
+        {
+          eyebrow: "06 / deployment",
+          title: "Push to main is the release process",
+          body: `
+            <p class="overlay-p">Every push to main triggers a GitHub Actions workflow that:</p>
+            <ul class="cs-list">
+              <li>Installs dependencies and runs expo export --platform web</li>
+              <li>Rewrites the two classes of root-absolute paths (index.html + font httpServerLocation) to relative, so the build works from a Pages subpath</li>
+              <li>Uploads and deploys the static output via actions/deploy-pages</li>
+            </ul>
+            <p class="overlay-p">No server to maintain, no manual deploy step.</p>
+          `
+        },
+        {
+          eyebrow: "07 / reflection",
+          title: "What I'd highlight in an interview",
+          body: `
+            <ul class="cs-list">
+              <li>Debugging a caching bug by disproving hypotheses one at a time (browser cache → service worker → stale tab → Metro's own bundle freeze) instead of guessing.</li>
+              <li>Diagnosing a real-world SDK/client version mismatch by checking the actual published App Store metadata, not just the docs.</li>
+              <li>Not trusting a production deploy fix until it was reproduced and verified locally under the same conditions (served from a real subpath) first.</li>
+              <li>Designing a responsive layout as one small breakpoint switch in the root component rather than scattering media-query logic across every screen.</li>
+            </ul>
+          `
+        }
+      ]
     },
     {
       title: "Project Four",
@@ -2092,12 +2293,10 @@
     // and it fills the whole card with that photo/screenshot automatically
     if(p.image){
       return `
-        <span class="project-badge${p.badgeAlign === 'right' ? ' badge-right' : ''}">${p.type}</span>
         <img class="project-photo" src="${p.image}" alt="${p.title}" style="object-position:${p.imagePosition || 'center'};">
       `;
     }
     return `
-      <span class="project-badge">${p.type}</span>
       <div class="project-window" style="width:78%;">
         <div class="project-window-bar"><span></span><span></span><span></span></div>
         <div class="project-window-body">${p.title}</div>
@@ -2124,7 +2323,7 @@
       ${mockupHTML(p)}
       <div class="project-meta">
         <div>
-          <div class="project-title">${p.title}</div>
+          <div class="project-title">${p.title}<span class="project-type-inline">· ${p.type}</span></div>
           <div class="project-desc">${p.desc}</div>
         </div>
         <span class="project-year">${p.year}</span>
