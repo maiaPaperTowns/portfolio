@@ -379,6 +379,12 @@
   .timeline-title{
     font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1rem;
     color:var(--ink); transition:color .2s ease;
+    display:inline-flex; align-items:baseline; gap:10px;
+  }
+  .timeline-title::before{
+    content:''; display:inline-block; flex:none;
+    width:6px; height:6px; border-radius:50%;
+    background:var(--accent); transform:translateY(-1px);
   }
   .timeline-sub{ font-weight:400; color:var(--ink-soft); }
   .timeline-loc{ color:var(--ink-soft); opacity:0.7; font-weight:400; }
