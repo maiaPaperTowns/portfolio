@@ -2546,26 +2546,49 @@ src/
   const aboutOverlay = document.getElementById('aboutOverlay');
   const openAbout = () => openOverlay(aboutOverlay);
   const closeAbout = () => closeOverlay(aboutOverlay);
-  document.getElementById('navAboutLink').addEventListener('click', e => { e.preventDefault(); openAbout(); });
-  const mobileAboutLink = document.getElementById('mobileAboutLink');
-  if(mobileAboutLink) mobileAboutLink.addEventListener('click', e => { e.preventDefault(); openAbout(); });
   document.getElementById('aboutClose').addEventListener('click', closeAbout);
   aboutOverlay.addEventListener('click', e => { if(e.target === aboutOverlay) closeAbout(); });
 
   const lensOverlay = document.getElementById('lensOverlay');
   const openLens = () => openOverlay(lensOverlay);
   const closeLens = () => closeOverlay(lensOverlay);
-  document.getElementById('navLensLink').addEventListener('click', e => { e.preventDefault(); openLens(); });
-  const mobileLensLink = document.getElementById('mobileLensLink');
-  if(mobileLensLink) mobileLensLink.addEventListener('click', e => { e.preventDefault(); openLens(); });
   document.getElementById('lensClose').addEventListener('click', closeLens);
   lensOverlay.addEventListener('click', e => { if(e.target === lensOverlay) closeLens(); });
 
-  window.addEventListener('keydown', e => {
-    if(e.key !== 'Escape') return;
+  // ---- close whichever overlay is currently open, so switching between
+  // sections/overlays never requires manually hitting close first ----
+  function closeAllOverlays(){
     if(overlay.classList.contains('open')) closeProject();
     if(aboutOverlay.classList.contains('open')) closeAbout();
     if(lensOverlay.classList.contains('open')) closeLens();
+  }
+
+  document.getElementById('navAboutLink').addEventListener('click', e => { e.preventDefault(); closeAllOverlays(); openAbout(); });
+  const mobileAboutLink = document.getElementById('mobileAboutLink');
+  if(mobileAboutLink) mobileAboutLink.addEventListener('click', e => { e.preventDefault(); closeAllOverlays(); openAbout(); });
+
+  document.getElementById('navLensLink').addEventListener('click', e => { e.preventDefault(); closeAllOverlays(); openLens(); });
+  const mobileLensLink = document.getElementById('mobileLensLink');
+  if(mobileLensLink) mobileLensLink.addEventListener('click', e => { e.preventDefault(); closeAllOverlays(); openLens(); });
+
+  // ---- nav links that jump to an in-page section (work, contact, etc.):
+  // if an overlay is open, close it first, then scroll straight there ----
+  document.querySelectorAll('nav a[href^="#"], .mobile-tabbar a[href^="#"]').forEach(a => {
+    const href = a.getAttribute('href');
+    if(href === '#' ) return; // handled separately (about/lens use their own handlers)
+    a.addEventListener('click', e => {
+      const target = document.querySelector(href);
+      if(!target) return;
+      e.preventDefault();
+      const hadOverlayOpen = overlay.classList.contains('open') || aboutOverlay.classList.contains('open') || lensOverlay.classList.contains('open');
+      closeAllOverlays();
+      target.scrollIntoView({ behavior: hadOverlayOpen ? 'instant' : 'smooth' });
+    });
+  });
+
+  window.addEventListener('keydown', e => {
+    if(e.key !== 'Escape') return;
+    closeAllOverlays();
   });
 
   // ---- nav bubble (glassy hover pill) ----
